@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -7,13 +7,11 @@ import {
   FormField,
   FormItem,
   FormMessage,
-  FormDescription,
 } from '@/components/ui/form';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -22,8 +20,10 @@ import { toast } from 'sonner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Loader, CircleCheck } from 'lucide-react';
-import axios from 'axios';
+import { Loader, CircleCheck, ArrowRight } from 'lucide-react';
+import { useDebounce } from '@uidotdev/usehooks';
+import { createUser } from '@/app/onboarding/actions';
+import { useRouter } from 'next/navigation'
 
 const usernameSearchSchema = z.object({
   username: z
@@ -38,39 +38,58 @@ const usernameSearchSchema = z.object({
     .toLowerCase(),
 });
 
-function FormComp({ id }) {
+function FormComp() {
   const [username, setUsername] = useState('');
-  const [error, setError] = useState(null);
+  const [user, setUser] = useState('');
+  const [success, setSuccess] = useState(false);
   const [available, setAvailable] = useState(false);
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const debouncedTerm = useDebounce(user, 1000);
+  const router = useRouter()
 
   const form = useForm({
     resolver: zodResolver(usernameSearchSchema),
     defaultValues: { username: '' },
   });
 
-  const checkAvailability = async (data) => {
-    setLoading(true);
-    setDisabled(true);
-    setAvailable(false);
-    const value = data.username;
-    try {
-      const response = await axios.get(
-        `/onboarding/username?string=${value}`
-      );
-      const isAvailable = response.data.availability;
-      if (isAvailable) {
-        setDisabled(false);
-        setLoading(false);
-        setAvailable(true);
-      } else {
-        setAvailable(false);
+  async function checkAvailability(data) {
+    setUser(data.username);
+  }
+
+  useEffect(() => {
+    const searchUsername = async () => {
+      setDisabled(true);
+      if (debouncedTerm) {
+        setLoading(true);
+        const toastId = toast.loading('Checking...');
+        if (user) {
+          const endpoint = `/onboarding/username?string=${user}`;
+          const response = await fetch(endpoint);
+          const data = await response.json();
+          if (data.availability) {
+            setAvailable(true);
+            setDisabled(false);
+            setLoading(false);
+            toast.success(data.message, { id: toastId });
+          } else {
+            setDisabled(true);
+            setLoading(false);
+            setAvailable(false);
+            toast.error(data.message, { id: toastId });
+          }
+        } else {
+          setDisabled(true);
+          setLoading(true);
+          setAvailable(false);
+          toast.error('Enter an username.', { id: toastId });
+        }
       }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    };
+
+    searchUsername();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedTerm]);
 
   function inputChange(e) {
     const value = e.target.value;
@@ -81,25 +100,23 @@ function FormComp({ id }) {
     }
   }
 
-  async function createUser(data){
+  async function handleSubmit(data) {
     setLoading(true)
-    setDisabled(true)
-    if(username === data.username){
-      try{
-        await axios.post(`/onboarding/create`, { username: data.username })
-      }catch(e){
-        console.log(e)
-      }
+    const res = await createUser(data)
+    toast[res.type](res.message)
+    if(res.type === "success"){
+      setSuccess(true)
+      router.push('/dashboard')
     }
     setLoading(false)
-    setDisabled(false)
+    setDisabled(true)
   }
 
   return (
     <Form {...form}>
       <form
         onChange={form.handleSubmit(checkAvailability)}
-        onSubmit={form.handleSubmit(createUser)}
+        onSubmit={available ? form.handleSubmit(handleSubmit) : null}
         onKeyUp={inputChange}
         className="space-y-4"
       >
@@ -108,9 +125,17 @@ function FormComp({ id }) {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormControl>
-                <Input placeholder="Username" {...field} />
-              </FormControl>
+              <div className="flex w-full">
+                <FormControl>
+                  <Input placeholder="Username" {...field} />
+                </FormControl>
+                <SubmitButton
+                  disabled={disabled}
+                  loading={loading}
+                  success={success}
+                  type="submit"
+                />
+              </div>
               <div className="p-1 font-semibold font-lato text-sm text-transparent bg-clip-text bg-gradient-to-r from-neutral-700 to-white flex items-center">
                 Walad.link/
                 <pre
@@ -121,11 +146,10 @@ function FormComp({ id }) {
                   {username}
                 </pre>
               </div>
-              <FormMessage className="text-red-500/60 text-xs" />
+              <FormMessage className="text-red-500/70 text-xs" />
             </FormItem>
           )}
         />
-        <SubmitButton disabled={disabled} loading={loading} type="submit"/>
       </form>
     </Form>
   );
@@ -135,8 +159,9 @@ function SubmitButton({ disabled, loading, success }) {
   return (
     <Button
       type="submit"
+      size="icon"
       disabled={disabled || loading}
-      className={`duration-700 w-full ${
+      className={`duration-700 h-10 w-14 ${
         success
           ? 'bg-green-500/30 focus:bg-green-500/30 hover:bg-green-500/30 text-green-500'
           : ''
@@ -147,26 +172,26 @@ function SubmitButton({ disabled, loading, success }) {
       ) : success ? (
         <CircleCheck className="h-6 w-6" />
       ) : (
-        'Choose'
+        <ArrowRight className="h-6 w-6"/>
       )}
     </Button>
   );
 }
 
-export default function Username({ id }) {
+export default function Username() {
   return (
     <div>
       <div>
         <Card className="max-w-[100vw] w-[100vw] sm:w-[20rem] h-screen sm:h-[20rem] grid place-items-center">
-          <div className='w-[20rem]'>
+          <div className="w-[20rem]">
             <CardHeader className="text-center">
               <CardTitle>Username.</CardTitle>
               <CardDescription>
-                Choose a username to get started.
+                Choose an username to get started.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <FormComp id={id} />
+              <FormComp />
             </CardContent>
           </div>
         </Card>

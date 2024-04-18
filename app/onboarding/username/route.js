@@ -1,38 +1,81 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
-import { get } from '@/lib/db';
-import slugify from 'slugify';
+import { Redis } from '@upstash/redis';
+import { Ratelimit } from '@upstash/ratelimit';
+import { z } from 'zod';
+
+const usernameSchema = z.object({
+  username: z
+    .string()
+    .trim()
+    .min(5, { message: 'Username must contain 4+ characters.' })
+    .max(32, { message: 'Username cannot exceed 32 characters.' })
+    .regex(/^[a-zA-Z0-9-]+$/, {
+      message:
+        'Username can only contain letters, numbers, underscores, and hyphens.',
+    })
+    .toLowerCase(),
+});
+
+const redis = new Redis({
+  url: process.env.REDIS_URL,
+  token: process.env.REDIS_TOKEN,
+});
+
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(10, '120 s'),
+  analytics: true,
+  prefix: 'ratelimit',
+});
 
 export async function GET(request, context) {
-  const session = await getServerSession(authOptions);
   let username = request.nextUrl.searchParams.get('string');
-  username = slugify(username, {
-    replacement: '-', 
-    remove: /[*+~._()'"!:@]/g, 
-    lower: false, 
-    strict: false, 
-    locale: 'en',
-    trim: true,
+
+  if (!username) {
+    res.status(400).json({ availability: false, message: 'Username is empty' });
+    return;
+  }
+  const validatedFields = usernameSchema.safeParse({
+    username,
   });
+  if (!validatedFields.success) {
+    return NextResponse.json(
+      {
+        availability: false,
+        message: validatedFields.error.flatten().fieldErrors,
+      },
+      { status: 400 }
+    );
+  }
+  const session = await getServerSession(authOptions);
+  const identifier = session.user.id;
+  const { success, remaining } = await ratelimit.limit(identifier);
+  console.log(remaining);
+  if (!success) {
+    return NextResponse.json(
+      { availability: false, message: 'Ratelimit reached.' },
+      { status: 202 }
+    );
+  }
   if (session) {
     try {
-      const availability = await get('usernames', {
-        username,
-      });
-      if (!availability) {
-        return NextResponse.json({
-          availability: true,
-          message: 'Username available.',
-        });
+      const exists = await redis.hget(`user:${username}`, 'exists');
+      if (exists) {
+        return NextResponse.json(
+          { availability: false, message: 'Username is already taken.' },
+          { status: 202 }
+        );
       }
       return NextResponse.json(
-        { availability: false, message: 'Username unavailable.' },
-        { status: 202 }
+        { availability: true, message: 'Username is available.' },
+        { status: 200 }
       );
     } catch (e) {
+      console.log(e);
       return NextResponse.json(
-        { availability: false, message: e.message },
+        { availability: false, message: 'Something went wrong.' },
         { status: 500 }
       );
     }

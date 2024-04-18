@@ -99,7 +99,7 @@ export default function Authentication() {
                       <FormControl>
                         <Input placeholder="Email" {...field} />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-red-500/70 text-xs"/>
                     </FormItem>
                   )}
                 />

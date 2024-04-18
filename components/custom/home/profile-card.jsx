@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Navigation, BadgeCheck } from 'lucide-react'
 
 export default function ProfileCard({ background }) {
-  const image = "https://images.ducklabs.xyz/optimize/waladlinkweb/assets/a10a397f-c6f0-416c-83f2-95ae6bc5bb1d.jpg?bucket=ducklabs&width=200&height=200%3Dquality%3D10"
+  const image = "https://images.ducklabs.xyz/optimize/waladlinkweb/assets/5665d5ff-93f5-49ed-9a80-ea11b3a30e18.png?bucket=ducklabs&width=200&height=200%3Dquality%3D10"
   return (
     <main>
       <motion.div
@@ -36,14 +36,14 @@ export default function ProfileCard({ background }) {
               height="100"
               className="rounded-none shadow-lg h-auto w-auto"
             />
-            <div className="mt-2 font-bold flex align-middle items-center">A guy with a gun <BadgeCheck className='ml-2 pt-[3px] h-5 w-5'/></div>
+            <div className="mt-2 font-bold flex align-middle items-center">Cloudy Blobs<BadgeCheck className='ml-2 pt-[3px] h-5 w-5'/></div>
           </div>
           <div className="flex items-center align-middle">
             <Navigation className='h-4 w-4' /> <p className="pl-2 text-xs">United Kingdom</p>
           </div>
-          <div className="shadow-inner py-2 px-4 rounded-none text-sm font-light font-mono text-center">
+          <div className="shadow-inner py-2 px-4 rounded-none text-sm font-light font-mono text-center bg-black/10 hover:bg-black/30 duration-500">
             <p>
-              
+              Image quality: Potato. But hey, at least it&apos;s not a loading screen... yet.
             </p>
           </div>
           <div className="w-full">

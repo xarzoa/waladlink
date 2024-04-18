@@ -1,19 +1,18 @@
 'use client';
 import { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -23,52 +22,66 @@ import { toast } from 'sonner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Loader } from 'lucide-react';
+import SubmitButton from '../submit-button';
+import { updateAvatar, updateInfo } from '@/app/dashboard/settings/action';
 
 const FormSchema = z.object({
   name: z.string(),
-  image: z.string(),
 });
 
-export default function SettingsComp({ name }) {
-  const [error, setError] = useState(null);
-  const [disable, setDisable] = useState(false);
+export default function SettingsComp({ data }) {
+  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: name,
+      name: data.name || '',
     },
   });
   async function onSubmit(data) {
     setLoading(true);
-    try {
-      setError(null);
-      toast.success("Name updated.",{
-        description: `You updated your name to ${data.name} successfully.`,
-      });
-      setLoading(false);
-      setDisable(true);
+    const res = await updateInfo(data);
+    toast[res.type](res.message);
+    if (res.type === 'success') {
+      setSuccess(true);
       form.reset();
-    } catch (e) {
-      setError(e.message);
-      toast.error("Dang",{
-        description: error,
-      });
     }
-
+    setLoading(false);
+    setDisabled(true);
     setTimeout(() => {
-      setError(null);
-    }, 3000);
-
-    setTimeout(() => {
-      setDisable(false);
-    }, 30000);
+      setDisabled(false);
+      setSuccess(false);
+    }, 2000);
+  }
+  async function handleAvatar(data) {
+    const toastId = toast.loading('Uploading...');
+    if (data.target.files.length === 1) {
+      try {
+        const file = new FormData();
+        file.append('file', data.target.files[0]);
+        let responce = await fetch(
+          'https://images.ducklabs.xyz/upload?id=duckpass&path=avatars&bucket=ducklabs',
+          {
+            method: 'POST',
+            body: file,
+          }
+        );
+        responce = await responce.json();
+        const res = await updateAvatar(responce);
+        toast[res.type](res.message, { id: toastId });
+      } catch (e) {
+        console.log(e);
+        toast.error(e.message, { id: toastId });
+      }
+    } else {
+      toast.error('Select 1 file.', { id: toastId });
+    }
   }
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <Card>
           <CardHeader>
@@ -79,47 +92,56 @@ export default function SettingsComp({ name }) {
           </CardHeader>
           <CardContent className="grid w-full lg:grid-cols-2 md:grid-cols-2 items-center gap-2">
             <div>
-              <Label htmlFor="picture">Picture</Label>
-              <Avatar id="picture" className="h-32 w-32 mt-[8px]">
+              <Label>Picture</Label>
+              <Avatar className="h-32 w-32 mt-[8px]">
                 <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
+                  src={`${data.image}&width=128&height=128`}
+                  alt={data.name || 'Profile picture'}
                 />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>
+                  {data.name
+                    ? data.name.split('')[0].toUpperCase()
+                    : data.email.split('')[0].toUpperCase()}
+                </AvatarFallback>
               </Avatar>
             </div>
-            <Input type="file" className="mt-[8px]" />
+            <Input
+              placeholder="Avatar"
+              type="file"
+              accept="image/png, image/webp, image/jpeg"
+              onChange={handleAvatar}
+            />
           </CardContent>
           <CardContent>
-            <Form {...form}>
+          <Form {...form}>
               <form
-                onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-4"
+                onSubmit={form.handleSubmit(onSubmit)}
               >
                 <FormField
                   control={form.control}
-                  name="email"
+                  name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <Label htmlFor="name">Name</Label>
+                      <FormLabel className="font-bold text-neutral-300">
+                        Name
+                      </FormLabel>
                       <FormControl>
-                        <Input placeholder="Name" id="name" {...field} />
+                        <Input placeholder="Name" {...field} />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-red-500/70 text-xs" />
                     </FormItem>
                   )}
                 />
-                <Button
-                  type="submit"
-                  disabled={disable || loading}
-                  className="duration-700 w-full"
-                >
-                  {loading ? (
-                    <Loader className="h-6 w-6 animate-spin" />
-                  ) : (
-                    'Update'
-                  )}
-                </Button>
+                <div className="flex justify-between">
+                  <div></div>
+                  <SubmitButton
+                    disabled={disabled}
+                    success={success}
+                    loading={loading}
+                    childern={'Save'}
+                  />
+                </div>
               </form>
             </Form>
           </CardContent>

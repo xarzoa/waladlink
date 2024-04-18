@@ -9,7 +9,7 @@ import {
 import { usePathname } from 'next/navigation';
 import { Menu, Settings, Home, WalletMinimal, User } from 'lucide-react';
 import Link from 'next/link';
-import Profile from './profile';
+import Profile from './header-profile';
 
 export default function Header({ session }) {
   const [offset, setOffset] = useState(0);
@@ -56,13 +56,13 @@ export default function Header({ session }) {
   return (
     <header className="flex items-center">
       <nav
-        className={`z-50 w-full lg:p-4 flex fixed top-0 duration-500 ${
+        className={`z-50 w-full md:p-4 flex fixed top-0 duration-500 ${
           isScrolled ? 'p-2' : ''
         }`}
       >
         <div className="backdrop-blur-lg bg-black/20 border w-full p-2">
           <div className="w-full font-semibold flex align-middle items-center justify-between text-white">
-            <div className="lg:flex space-x-4 hidden">
+            <div className="md:flex space-x-4 hidden">
               {menuButtons.map((button, key) => (
                 <Button
                   key={key}
@@ -79,7 +79,7 @@ export default function Header({ session }) {
                 </Button>
               ))}
             </div>
-            <div className="lg:hidden">
+            <div className="md:hidden">
               <Popover>
                 <Button
                   variant="ghost"

@@ -1,12 +1,4 @@
-import Image from 'next/image';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { ProfileComp } from "@/components/custom/dashboard/profile";
 
 export const metadata = {
   title: 'WalAd - Dashboard/Profile',
@@ -18,28 +10,7 @@ export const metadata = {
 export default function Profile() {
   return (
     <main>
-      <Card>
-        <CardHeader>
-          <CardTitle>Image</CardTitle>
-          <CardDescription>Card Description</CardDescription>
-        </CardHeader>
-        <CardContent>
-        </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card Description</CardDescription>
-        </CardHeader>
-        <CardContent>
-        </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
-      </Card>
+      <ProfileComp/>
     </main>
   );
 }
