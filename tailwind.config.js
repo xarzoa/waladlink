@@ -18,7 +18,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        lato: "var(--font-lato)"
+        lato: "var(--font-lato)",
+        dmsans: "var(--font-dm_sans)",
+        jbmono: "var(--font-jb_mono)"
       },
       colors: {
         border: "hsl(var(--border))",
