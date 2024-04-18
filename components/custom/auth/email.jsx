@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
-import { useSearchParams } from 'next/navigation';
 import {
   Form,
   FormControl,
@@ -30,8 +29,6 @@ const FormSchema = z.object({
 });
 
 export default function Authentication() {
-  const searchParams = useSearchParams();
-  const errorParams = searchParams.get('error');
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
