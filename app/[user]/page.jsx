@@ -36,6 +36,13 @@ export default async function UserPage({ params }) {
       </div>
     );
   }
+  if(user.banned){
+    return(
+      <div className='grid place-items-center'>
+        You&apos;re Banned
+      </div>
+    )
+  }
   if (user.theme === 'candy') {
     return <CandyTheme user={user} />;
   }
