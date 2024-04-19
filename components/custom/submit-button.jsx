@@ -1,7 +1,13 @@
 import { Loader, CircleCheck } from 'lucide-react';
 import { Button } from '../ui/button';
 
-export default function SubmitButton({ childern, disabled, loading, success, size }) {
+export default function SubmitButton({
+  childern,
+  disabled,
+  loading,
+  success,
+  size,
+}) {
   return (
     <Button
       type="submit"

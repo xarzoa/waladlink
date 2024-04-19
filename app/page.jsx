@@ -15,7 +15,7 @@ export const metadata = {
 
 export default function HomePage() {
   return (
-    <main className='mt-14'>
+    <main className="mt-14">
       <div className="text-alice-blue">
         <div>
           <Header display={true} />

@@ -39,10 +39,16 @@ export default function FAQ() {
   return (
     <div className="bg-gradient-to-b from-neutral-900 to-black rounded-none">
       <div>
-        <Accordion type="single" collapsible className="w-full grid grid-cols-1 md:grid-cols-2 p-6 gap-6">
+        <Accordion
+          type="single"
+          collapsible
+          className="w-full grid grid-cols-1 md:grid-cols-2 p-6 gap-6"
+        >
           {faqs.map((faq, index) => (
             <AccordionItem value={`item-${index + 1}`} key={index}>
-              <AccordionTrigger className="text-start">{faq.question}</AccordionTrigger>
+              <AccordionTrigger className="text-start">
+                {faq.question}
+              </AccordionTrigger>
               <AccordionContent>{faq.answer}</AccordionContent>
             </AccordionItem>
           ))}

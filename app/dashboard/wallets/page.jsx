@@ -1,4 +1,4 @@
-import WalletComp from "@/components/custom/dashboard/wallet";
+import WalletComp from '@/components/custom/dashboard/wallet';
 
 export const metadata = {
   title: 'WalAd - Dashboard/Wallets',
@@ -9,7 +9,7 @@ export const metadata = {
 export default async function Wallets() {
   return (
     <main>
-      <WalletComp/>
+      <WalletComp />
     </main>
   );
 }

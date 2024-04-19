@@ -8,7 +8,10 @@ export async function GET(request, context) {
       const { _id, history, planInfo, plan, ...data } = res;
       return NextResponse.json({ data }, { status: 200 });
     }
-    return NextResponse.json({ error: "User doesn't excist." }, { status: 404 });
+    return NextResponse.json(
+      { error: "User doesn't excist." },
+      { status: 404 }
+    );
   } catch (e) {
     console.log(e);
     return NextResponse.json(

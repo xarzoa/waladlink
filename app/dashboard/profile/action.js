@@ -93,7 +93,7 @@ export async function updateTheme(data) {
       type: 'error',
     };
   }
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (session) {
     const userId = session.user.id;
     try {
@@ -131,7 +131,7 @@ export async function updateAvatar(data) {
       type: 'error',
     };
   }
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (session) {
     const userId = session.user.id;
     try {
@@ -168,7 +168,7 @@ export async function updateUsername(data, oldUsername) {
       type: 'error',
     };
   }
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (session) {
     const userId = session.user.id;
     try {

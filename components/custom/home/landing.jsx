@@ -25,14 +25,14 @@ export default function Landing() {
               Share your long messy wallet addresses,but wait try WalAd instead.
             </div>
           </motion.div>
-          <div className='my-6'>
+          <div className="my-6">
             <motion.div
               className="text-center text-lg font-bold"
               whileHover={{ scale: 0.95 }}
               transition={{ type: 'spring', bounce: 0.1, duration: 0.5 }}
             >
               <Button className="text-2xl font-bold py-6 rounded-none" asChild>
-                <Link href="/dashboard">Get started</Link>
+                <Link href="/auth">Get started</Link>
               </Button>
             </motion.div>
           </div>

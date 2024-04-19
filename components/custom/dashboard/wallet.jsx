@@ -105,18 +105,18 @@ export default function WalletComp() {
   });
   async function onSubmit(data) {
     setLoading(true);
-    const toastId = toast.loading('Adding your wallet...')
+    const toastId = toast.loading('Adding your wallet...');
     const res = await addWallet(data);
     toast[res.type](res.message, { id: toastId });
-    if (res.type === 'success'){
-      setSuccess(true)
+    if (res.type === 'success') {
+      setSuccess(true);
       form.reset();
     }
     setLoading(false);
     setDisabled(true);
     setTimeout(() => {
       setDisabled(false);
-      setSuccess(false)
+      setSuccess(false);
     }, 2000);
   }
 
@@ -207,9 +207,9 @@ export default function WalletComp() {
 
 function Wallets({ wallets }) {
   async function deleteAddress(name, address, id) {
-    const toastId = toast.loading("Deleting your wallet...")
+    const toastId = toast.loading('Deleting your wallet...');
     const res = await removeWallet({ name, address, id });
-    toast[res.type](res.message, { id: toastId});
+    toast[res.type](res.message, { id: toastId });
   }
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2 mb-12">

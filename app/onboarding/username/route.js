@@ -48,7 +48,7 @@ export async function GET(request, context) {
       { status: 400 }
     );
   }
-  const session = await auth()
+  const session = await auth();
   const identifier = session.user.id;
   const { success, remaining } = await ratelimit.limit(identifier);
   console.log(remaining);

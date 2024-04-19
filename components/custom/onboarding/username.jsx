@@ -23,7 +23,7 @@ import { z } from 'zod';
 import { Loader, CircleCheck, ArrowRight } from 'lucide-react';
 import { useDebounce } from '@uidotdev/usehooks';
 import { createUser } from '@/app/onboarding/actions';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 
 const usernameSearchSchema = z.object({
   username: z
@@ -46,7 +46,7 @@ function FormComp() {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const debouncedTerm = useDebounce(user, 1000);
-  const router = useRouter()
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(usernameSearchSchema),
@@ -101,16 +101,16 @@ function FormComp() {
   }
 
   async function handleSubmit(data) {
-    setLoading(true)
-    const toastId = toast.loading('Creating your account...')
-    const res = await createUser(data)
-    toast[res.type](res.message, { id: toastId })
-    if(res.type === "success"){
-      setSuccess(true)
-      router.push('/dashboard')
+    setLoading(true);
+    const toastId = toast.loading('Creating your account...');
+    const res = await createUser(data);
+    toast[res.type](res.message, { id: toastId });
+    if (res.type === 'success') {
+      setSuccess(true);
+      router.push('/dashboard');
     }
-    setLoading(false)
-    setDisabled(true)
+    setLoading(false);
+    setDisabled(true);
   }
 
   return (
@@ -173,7 +173,7 @@ function SubmitButton({ disabled, loading, success }) {
       ) : success ? (
         <CircleCheck className="h-6 w-6" />
       ) : (
-        <ArrowRight className="h-6 w-6"/>
+        <ArrowRight className="h-6 w-6" />
       )}
     </Button>
   );

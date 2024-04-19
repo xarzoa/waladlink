@@ -22,27 +22,31 @@ const walletSchema = z.object({
 export async function addWallet(data) {
   const validatedFields = walletSchema.safeParse({
     name: data.name,
-    address: data.address
+    address: data.address,
   });
   if (!validatedFields.success) {
-    const error = validatedFields.error.flatten().fieldErrors
+    const error = validatedFields.error.flatten().fieldErrors;
     return {
-      message: error.address ?? error.name ,
+      message: error.address ?? error.name,
       type: 'error',
     };
   }
-  const session = await auth()
+  const session = await auth();
   if (session) {
     const userId = session.user.id;
-    const userData = await get('userData', { _id: new ObjectId(userId)})
-    if(userData.planInfo.wallets > userData.wallets.length){
+    const userData = await get('userData', { _id: new ObjectId(userId) });
+    if (userData.planInfo.wallets > userData.wallets.length) {
       try {
-        const wallet = { wallets: {
-          name: data.name,
-          address: data.address,
-          id: userData.wallets.length + 1
-        }}
-        await update('userData', '$push', wallet, { _id: new ObjectId(userId)})
+        const wallet = {
+          wallets: {
+            name: data.name,
+            address: data.address,
+            id: userData.wallets.length + 1,
+          },
+        };
+        await update('userData', '$push', wallet, {
+          _id: new ObjectId(userId),
+        });
         return {
           message: 'Wallet address added.',
           type: 'success',
@@ -55,7 +59,7 @@ export async function addWallet(data) {
         };
       }
     }
-    return  {
+    return {
       message: `Your plan only includes ${userData.planInfo.wallets} wallets. To add more, Upgrade your plan.`,
       type: 'error',
     };
@@ -72,9 +76,9 @@ export async function removeWallet(data) {
     address: data.address,
   });
   if (!validatedFields.success) {
-    const error = validatedFields.error.flatten().fieldErrors
+    const error = validatedFields.error.flatten().fieldErrors;
     return {
-      message: error.address ?? error.name ,
+      message: error.address ?? error.name,
       type: 'error',
     };
   }
@@ -82,12 +86,14 @@ export async function removeWallet(data) {
   if (session) {
     const userId = session.user.id;
     try {
-      const wallet = { wallets: {
-        name: data.name,
-        address: data.address,
-        id: data.id
-      }}
-      await update('userData', '$pull', wallet, { _id: new ObjectId(userId)})
+      const wallet = {
+        wallets: {
+          name: data.name,
+          address: data.address,
+          id: data.id,
+        },
+      };
+      await update('userData', '$pull', wallet, { _id: new ObjectId(userId) });
       return {
         message: 'Wallet address removed.',
         type: 'success',

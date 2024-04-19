@@ -41,13 +41,13 @@ export default function Authentication() {
 
   async function onSubmit(data) {
     setLoading(true);
-    const toastId = toast.loading('Seding the Magic-Link...')
-    const res = await signInAction(data)
-    toast[res.type](res.message, { id:toastId })
+    const toastId = toast.loading('Seding the Magic-Link...');
+    const res = await signInAction(data);
+    toast[res.type](res.message, { id: toastId });
     if (res.type === 'success') {
       form.reset();
     }
-    setLoading(false)
+    setLoading(false);
     setTimeout(() => {
       setDisabled(false);
     }, 30000);
@@ -65,10 +65,7 @@ export default function Authentication() {
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form
-                action={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
+              <form action={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                   control={form.control}
                   name="email"
@@ -77,7 +74,7 @@ export default function Authentication() {
                       <FormControl>
                         <Input placeholder="Email" {...field} />
                       </FormControl>
-                      <FormMessage className="text-red-500/70 text-xs"/>
+                      <FormMessage className="text-red-500/70 text-xs" />
                     </FormItem>
                   )}
                 />

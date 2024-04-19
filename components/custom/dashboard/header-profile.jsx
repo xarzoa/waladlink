@@ -42,7 +42,7 @@ export default function Profile({ path, session }) {
   const [image, setImage] = useState(session.user.image);
   const [email, setEmail] = useState(session.user.email);
   const doSignOut = async () => {
-    const toastId = toast.loading("Siging out...")
+    const toastId = toast.loading('Siging out...');
     const res = await signOutAction();
     toast[res.type](res.message, { id: toastId });
   };

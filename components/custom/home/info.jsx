@@ -4,10 +4,8 @@ import { motion } from 'framer-motion';
 
 export default function Info() {
   return (
-    <div className='info-bg rounded-none'>
-      <div
-        className="grid grid-cols-1 md:grid-cols-2 place-items-start cursor-help text-gray-400 backdrop-blur-xl"
-      >
+    <div className="info-bg rounded-none">
+      <div className="grid grid-cols-1 md:grid-cols-2 place-items-start cursor-help text-gray-400 backdrop-blur-xl">
         <motion.div
           whileHover={{ scale: 0.95 }}
           transition={{ type: 'spring', bounce: 0.1, duration: 0.5 }}

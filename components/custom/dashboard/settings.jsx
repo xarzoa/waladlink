@@ -42,7 +42,7 @@ export default function SettingsComp({ data }) {
   });
   async function onSubmit(data) {
     setLoading(true);
-    const toastId = toast.loading("Updating your info...")
+    const toastId = toast.loading('Updating your info...');
     const res = await updateInfo(data);
     toast[res.type](res.message, { id: toastId });
     if (res.type === 'success') {
@@ -114,7 +114,7 @@ export default function SettingsComp({ data }) {
             />
           </CardContent>
           <CardContent>
-          <Form {...form}>
+            <Form {...form}>
               <form
                 className="space-y-4"
                 onSubmit={form.handleSubmit(onSubmit)}

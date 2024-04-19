@@ -83,9 +83,9 @@ function BasicInfo({ info }) {
   });
   async function onSubmit(data) {
     setLoading(true);
-    const toastId = toast.loading("Updating your info...")
+    const toastId = toast.loading('Updating your info...');
     const res = await updateInfo(data);
-    toast[res.type](res.message, { id: toastId});
+    toast[res.type](res.message, { id: toastId });
     if (res.type === 'success') {
       setSuccess(true);
       form.reset();
@@ -257,14 +257,14 @@ function ThemeBuilder({ theme }) {
   const [disabled, setDisabled] = useState(false);
   const form = useForm({
     resolver: zodResolver(themeSchema),
-    defaultValue: theme
+    defaultValue: theme,
   });
   form.setValue(theme);
   async function handleChange(data) {
     setLoading(true);
-    const toastId = toast.loading("Changing your theme...")
+    const toastId = toast.loading('Changing your theme...');
     const res = await updateTheme(data);
-    toast[res.type](res.message, { id: toastId});
+    toast[res.type](res.message, { id: toastId });
     if (res.type === 'success') {
       setSuccess(true);
       form.reset();
@@ -420,7 +420,7 @@ function ChangeUsername({ username }) {
   }
 
   async function handleSubmit(data) {
-    const toastId = toast.loading("Creating your account...")
+    const toastId = toast.loading('Creating your account...');
     setLoading(true);
     const res = await updateUsername(data);
     toast[res.type](res.message, { id: toastId });
@@ -433,7 +433,7 @@ function ChangeUsername({ username }) {
     setTimeout(() => {
       setDisabled(false);
       setSuccess(false);
-      setAvailable(null)
+      setAvailable(null);
     }, 10000);
   }
   return (

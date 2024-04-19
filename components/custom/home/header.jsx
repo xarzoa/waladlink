@@ -24,7 +24,11 @@ export default function Header() {
 
   return (
     <header className="flex items-center">
-      <nav className={`z-50 w-full lg:p-4 flex fixed top-0 duration-500 ${isScrolled ? 'p-2' : ''}`}>
+      <nav
+        className={`z-50 w-full lg:p-4 flex fixed top-0 duration-500 ${
+          isScrolled ? 'p-2' : ''
+        }`}
+      >
         <div className="backdrop-blur-lg bg-black/20 border w-full px-2 pl-4 py-2">
           <div className="w-full font-semibold flex align-middle items-center justify-between text-white">
             <div className="flex space-x-4">
@@ -34,7 +38,7 @@ export default function Header() {
             </div>
             <div>
               <Button asChild className="font-bold text-lg rounded-none">
-                <Link href="/dashboard">Login</Link>
+                <Link href="/auth">Login</Link>
               </Button>
             </div>
           </div>

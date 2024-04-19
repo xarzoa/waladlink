@@ -29,7 +29,7 @@ export async function createUser(data) {
       type: 'error',
     };
   }
-  const session = await auth()
+  const session = await auth();
   if (session) {
     const redis = new Redis({
       url: process.env.REDIS_URL,
@@ -57,7 +57,12 @@ export async function createUser(data) {
         usernames: [data.username],
       };
       await create('userData', userData, ['username']);
-      await update('users', "$unset", { isnew: '' }, { _id: new ObjectId(userId) });
+      await update(
+        'users',
+        '$unset',
+        { isnew: '' },
+        { _id: new ObjectId(userId) }
+      );
       await redis.hset(`user:${data.username}`, { exists: true, userId });
       return {
         message: 'User created.',

@@ -8,7 +8,7 @@ const infoSchema = z.object({
   name: z
     .string()
     .min(3, { message: 'Name must contain 3+ characters.' })
-    .max(16, { message: 'Name cannot exceed 16 characters.' })
+    .max(16, { message: 'Name cannot exceed 16 characters.' }),
 });
 
 const avatarSchema = z.object({
@@ -26,12 +26,12 @@ export async function updateInfo(data) {
       type: 'error',
     };
   }
-  const session = await auth()
+  const session = await auth();
   if (session) {
     const userId = session.user.id;
     try {
       const info = {
-        name: data.name
+        name: data.name,
       };
       await update('users', '$set', info, { _id: new ObjectId(userId) });
       return {
@@ -64,7 +64,7 @@ export async function updateAvatar(data) {
       type: 'error',
     };
   }
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (session) {
     const userId = session.user.id;
     try {
