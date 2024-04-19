@@ -10,9 +10,13 @@ export const metadata = {
 };
 
 export default async function Auth() {
-  const session = await auth()
+  try{
+    const session = await auth()
   if(session){
     redirect('/dashboard')
+  }
+  }catch(e){
+    console.log(e)
   }
   return (
     <main className="min-h-screen w-screen grid place-items-center">
