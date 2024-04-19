@@ -19,7 +19,7 @@ export async function signInAction(data) {
   }
   try {
     // await signIn('nodemailer', { email: data.email, redirect: false })
-    await signIn('nodemailer', { email: data.email, redirect: false });
+    await signIn('resend', { email: data.email, redirect: false });
     return {
       message: 'We sent you the magic-link. Check your spams too.',
       type: 'success',
