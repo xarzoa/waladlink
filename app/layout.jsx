@@ -44,7 +44,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Script src="https://analytics.ducklabs.xyz/script.js" data-website-id="2bfe41fd-e6b9-49c6-9958-afcc485e63a5"/>
+      <Script src="https://analytics.ducklabs.xyz/script.js" data-website-id={process.env.WEBSITE_ID}/>
       <head />
       <body
         className={cn(
