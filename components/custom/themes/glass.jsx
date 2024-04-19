@@ -16,7 +16,7 @@ export default function GlassTheme({ user }) {
             alt="Mountains"
             src={
               user.avatar ||
-              'https://images.ducklabs.xyz/optimize/waladlinkweb/assets/b8fe5f87-1aed-4db3-ac0a-8d8389bc4062.jpg?bucket=ducklabs&width=100&height=100'
+              'https://images.ducklabs.xyz/optimize/waladlinkweb/assets/b8fe5f87-1aed-4db3-ac0a-8d8389bc4062.jpg?bucket=ducklabs&width=1080&height=1080'
             }
             blurDataURL={
               user.avatar ||
