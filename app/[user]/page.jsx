@@ -8,6 +8,11 @@ export async function generateMetadata({ params }) {
   const res = await fetch(`${process.env.BASE_URL}/${user}/get`).then((res) =>
     res.json()
   );
+  if(res.data.banned){
+    return {
+      title: `${res.data?.name} is Banned.`,
+    };
+  }
   return {
     title: `${res.data?.name}'s WaladLink`,
     icons: {
