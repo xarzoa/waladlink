@@ -15,13 +15,6 @@ const fontLato = Lato({
   display: 'swap',
 });
 
-const firaMono = Fira_Mono({
-  weight: ['400', '500', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-fira_mono',
-});
-
 const dmSans = DM_Sans({
   subsets: ['latin'],
   display: 'swap',
@@ -52,10 +45,7 @@ export default function RootLayout({ children }) {
       <body
         className={cn(
           'min-h-screen max-w-[100vw] bg-background font-sans antialiased selection:bg-white selection:text-black',
-          fontLato.variable +
-            firaMono.variable +
-            dmSans.variable +
-            jbMono.variable
+          fontLato.variable + dmSans.variable + jbMono.variable
         )}
       >
         <ThemeProvider
