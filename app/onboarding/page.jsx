@@ -11,9 +11,6 @@ export const metadata = {
 
 export default async function OnBoarding(){
   const session = await auth()
-  if(!session){
-    redirect('/auth')
-  }
   if(session.user.isnew){
     permanentRedirect('/dashboard')
   }
