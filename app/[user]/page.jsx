@@ -23,6 +23,17 @@ export default async function UserPage({ params }) {
     return data.data
   }
   const user = await fetchData()
+  if(!user){
+    return(
+      <div>
+        <div className="grid place-items-center">
+          <div>
+            {JSON.stringify(user)}
+          </div>
+        </div>
+      </div>
+    )
+  }
   if(user.theme === "candy"){
     return(
       <CandyTheme user={user}/>
