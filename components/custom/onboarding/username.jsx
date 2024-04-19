@@ -102,8 +102,9 @@ function FormComp() {
 
   async function handleSubmit(data) {
     setLoading(true)
+    const toastId = toast.loading('Creating your account...')
     const res = await createUser(data)
-    toast[res.type](res.message)
+    toast[res.type](res.message, { id: toastId })
     if(res.type === "success"){
       setSuccess(true)
       router.push('/dashboard')

@@ -1,6 +1,5 @@
+import { auth } from '@/lib/auth';
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/auth';
 import { Redis } from '@upstash/redis';
 import { Ratelimit } from '@upstash/ratelimit';
 import { z } from 'zod';
@@ -49,7 +48,7 @@ export async function GET(request, context) {
       { status: 400 }
     );
   }
-  const session = await getServerSession(authOptions);
+  const session = await auth()
   const identifier = session.user.id;
   const { success, remaining } = await ratelimit.limit(identifier);
   console.log(remaining);

@@ -1,6 +1,5 @@
 import SettingsComp from "@/components/custom/dashboard/settings";
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth";
+import { auth } from '@/lib/auth';
 
 export const metadata = {
   title: 'WalAd - Dashboard/Settings',
@@ -10,7 +9,7 @@ export const metadata = {
 };
 
 export default async function Settings() {
-  const { session } = await getServerSession(authOptions)
+  const session = await auth()
   return (
     <main>
       <SettingsComp data={session.user}/>

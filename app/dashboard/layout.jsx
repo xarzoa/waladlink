@@ -1,23 +1,18 @@
 import Header from "@/components/custom/dashboard/header";
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth";
+import { auth } from '@/lib/auth';
 import { redirect } from 'next/navigation'
 
 export default async function DashboardLayout({ children }) {
-  const auth = await getServerSession(authOptions)
-  if(auth?.user.isnew){
-    redirect('/onboarding')
+  const session = await auth()
+  if(!session){
+    redirect('/auth')
   }
-  const dummy = {
-    user:{
-      name: null,
-      email: null,
-      image: null
-    }
+  if(session.user.isnew){
+    redirect('/onboarding')
   }
   return (
     <div>
-      <Header session={auth ? auth.session : dummy}/>
+      <Header session={session}/>
       <div className="p-4 mt-14">
         {children}
       </div>

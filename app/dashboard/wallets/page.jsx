@@ -6,7 +6,7 @@ export const metadata = {
   url: 'https://www.walad.link',
 };
 
-export default function Wallets() {
+export default async function Wallets() {
   return (
     <main>
       <WalletComp/>

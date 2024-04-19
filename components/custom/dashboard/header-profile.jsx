@@ -1,6 +1,6 @@
 'use client';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { LogOut, Settings, Loader, MessagesSquare } from 'lucide-react';
+import { LogOut, Settings, MessagesSquare } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,11 +9,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useState } from 'react';
-import { signOut } from "next-auth/react"
+import { signOutAction } from '@/app/dashboard/action';
 
 function ReuseAvatar({ email, image, name }) {
   return (
@@ -31,7 +31,7 @@ function ReuseAvatar({ email, image, name }) {
 function SmallProfile({ email, name }) {
   return (
     <div className="text-neutral-400 p-2 grid grid-cols-1 items-baseline text-xs truncate">
-      <div className='text-sm font-bold'>{name}</div>
+      <div className="text-sm font-bold">{name}</div>
       <div>{email}</div>
     </div>
   );
@@ -41,11 +41,10 @@ export default function Profile({ path, session }) {
   const [name, setName] = useState(session.user.name);
   const [image, setImage] = useState(session.user.image);
   const [email, setEmail] = useState(session.user.email);
-  const [isLoading, setIsLoading] = useState(false);
   const doSignOut = async () => {
-    setIsLoading(true);
-    await signOut();
-    setIsLoading(false);
+    const toastId = toast.loading("Siging out...")
+    const res = await signOutAction();
+    toast[res.type](res.message, { id: toastId });
   };
 
   return (
@@ -63,24 +62,28 @@ export default function Profile({ path, session }) {
           <DropdownMenuLabel>Account</DropdownMenuLabel>
           <SmallProfile email={email} image={image} name={name} />
           <DropdownMenuSeparator />
-          <DropdownMenuItem asChild className={path === "/dashboard/settings" ? 'bg-neutral-600/40' : ''}>
+          <DropdownMenuItem
+            asChild
+            className={
+              path === '/dashboard/settings' ? 'bg-neutral-600/40' : ''
+            }
+          >
             <Link href="/dashboard/settings" className="flex items-center">
               <Settings className="mr-2 h-4 w-4" />
               Settings
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <a href="https://support.ducklabs.xyz" className="flex items-center">
+            <a
+              href="https://support.ducklabs.xyz"
+              className="flex items-center"
+            >
               <MessagesSquare className="mr-2 h-4 w-4" />
               Support
             </a>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={doSignOut}>
-            {isLoading ? (
-              <Loader className="h-4 w-4 mr-2 animate-spin" />
-            ) : (
-              <LogOut className="mr-2 h-4 w-4" />
-            )}
+            <LogOut className="mr-2 h-4 w-4" />
             Sign Out
           </DropdownMenuItem>
         </DropdownMenuContent>

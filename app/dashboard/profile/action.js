@@ -1,10 +1,9 @@
 'use server';
 import { z } from 'zod';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/auth';
 import { update } from '@/lib/db';
 import { Redis } from '@upstash/redis';
 import { ObjectId } from 'mongodb';
+import { auth } from '@/lib/auth';
 
 const infoSchema = z.object({
   name: z
@@ -55,7 +54,7 @@ export async function updateInfo(data) {
       type: 'error',
     };
   }
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (session) {
     const userId = session.user.id;
     try {

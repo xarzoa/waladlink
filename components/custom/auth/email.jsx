@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -23,13 +22,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Loader, CircleCheck } from 'lucide-react';
+import { signInAction } from '@/app/auth/action';
 
 const FormSchema = z.object({
   email: z.string().email(),
 });
 
 export default function Authentication() {
-  const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -42,31 +41,13 @@ export default function Authentication() {
 
   async function onSubmit(data) {
     setLoading(true);
-    try {
-      await signIn('email', {
-        email: data.email,
-        callbackUrl: '/dashboard',
-        redirect: false,
-      });
-      setError(null);
-      toast.success('Magic-Link sent.', {
-        description:
-          "We sent email to your inbox. Don't forget to check your spam folder.",
-      });
-      setLoading(false);
-      setDisabled(true);
+    const toastId = toast.loading('Seding the Magic-Link...')
+    const res = await signInAction(data)
+    toast[res.type](res.message, { id:toastId })
+    if (res.type === 'success') {
       form.reset();
-    } catch (e) {
-      setError(e.message);
-      toast.error('Dang', {
-        description: error,
-      });
     }
-
-    setTimeout(() => {
-      setError(null);
-    }, 3000);
-
+    setLoading(false)
     setTimeout(() => {
       setDisabled(false);
     }, 30000);
@@ -85,7 +66,7 @@ export default function Authentication() {
           <CardContent>
             <Form {...form}>
               <form
-                onSubmit={form.handleSubmit(onSubmit)}
+                action={form.handleSubmit(onSubmit)}
                 className="space-y-4"
               >
                 <FormField

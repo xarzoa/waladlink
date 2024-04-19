@@ -1,6 +1,5 @@
 import DashboardComp from "@/components/custom/dashboard/dashboard";
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth";
+import { auth } from '@/lib/auth';
 
 export const metadata = {
   title: 'WalAd - Dashboard',
@@ -9,7 +8,7 @@ export const metadata = {
 };
 
 export default async function Dashboard() {
-  const { session } = await getServerSession(authOptions)
+  const session = await auth()
   return (
     <main>
       <DashboardComp data={session.user}/>

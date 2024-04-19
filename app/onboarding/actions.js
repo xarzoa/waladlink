@@ -1,7 +1,6 @@
 'use server';
 import { z } from 'zod';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/auth';
+import { auth } from '@/lib/auth';
 import { create } from '@/lib/db';
 import { update } from '@/lib/updateAuth';
 import { ObjectId } from 'mongodb';
@@ -30,7 +29,7 @@ export async function createUser(data) {
       type: 'error',
     };
   }
-  const session = await getServerSession(authOptions);
+  const session = await auth()
   if (session) {
     const redis = new Redis({
       url: process.env.REDIS_URL,

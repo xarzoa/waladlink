@@ -105,8 +105,9 @@ export default function WalletComp() {
   });
   async function onSubmit(data) {
     setLoading(true);
+    const toastId = toast.loading('Adding your wallet...')
     const res = await addWallet(data);
-    toast[res.type](res.message);
+    toast[res.type](res.message, { id: toastId });
     if (res.type === 'success'){
       setSuccess(true)
       form.reset();
@@ -206,8 +207,9 @@ export default function WalletComp() {
 
 function Wallets({ wallets }) {
   async function deleteAddress(name, address, id) {
+    const toastId = toast.loading("Deleting your wallet...")
     const res = await removeWallet({ name, address, id });
-    toast[res.type](res.message);
+    toast[res.type](res.message, { id: toastId});
   }
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2 mb-12">

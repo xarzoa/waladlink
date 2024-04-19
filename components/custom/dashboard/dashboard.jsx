@@ -10,7 +10,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { useUser } from '@/lib/getUser';
-import useSWR from 'swr';
 
 export default function DashboardComp({ data }) {
   const { user, error, isLoading } = useUser('/dashboard/get');

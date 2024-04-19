@@ -1,9 +1,8 @@
 'use server';
 import { z } from 'zod';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/auth';
 import { get, update } from '@/lib/db';
 import { ObjectId } from 'mongodb';
+import { auth } from '@/lib/auth';
 
 const walletSchema = z.object({
   name: z
@@ -32,7 +31,7 @@ export async function addWallet(data) {
       type: 'error',
     };
   }
-  const session = await getServerSession(authOptions);
+  const session = await auth()
   if (session) {
     const userId = session.user.id;
     const userData = await get('userData', { _id: new ObjectId(userId)})

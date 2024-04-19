@@ -42,8 +42,9 @@ export default function SettingsComp({ data }) {
   });
   async function onSubmit(data) {
     setLoading(true);
+    const toastId = toast.loading("Updating your info...")
     const res = await updateInfo(data);
-    toast[res.type](res.message);
+    toast[res.type](res.message, { id: toastId });
     if (res.type === 'success') {
       setSuccess(true);
       form.reset();

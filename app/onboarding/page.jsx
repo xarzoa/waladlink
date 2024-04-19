@@ -1,6 +1,5 @@
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth";
-import { permanentRedirect } from 'next/navigation'
+import { auth } from '@/lib/auth';
+import { redirect, permanentRedirect } from 'next/navigation'
 import Username from "@/components/custom/onboarding/username";
 
 export const metadata = {
@@ -11,8 +10,11 @@ export const metadata = {
 };
 
 export default async function OnBoarding(){
-  const auth = await getServerSession(authOptions)
-  if(!auth?.user.isnew){
+  const session = await auth()
+  if(!session){
+    redirect('/auth')
+  }
+  if(session.user.isnew){
     permanentRedirect('/dashboard')
   }
   return(
