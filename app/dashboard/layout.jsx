@@ -7,6 +7,13 @@ export default async function DashboardLayout({ children }) {
   if (!session) {
     redirect('/auth');
   }
+  if(session.user.banned){
+    return(
+      <div className='grid place-items-center'>
+        Banned
+      </div>
+    )
+  }
   if (session.user.isnew) {
     redirect('/onboarding');
   }
