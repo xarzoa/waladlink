@@ -18,7 +18,7 @@ export async function signInAction(data) {
     };
   }
   try {
-    const res = await signIn('resend', { email: data.email, redirect: false })
+    await signIn('nodemailer', { email: data.email, redirect: false })
     return {
       message: 'K Dun.',
       type: 'success',
