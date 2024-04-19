@@ -7,7 +7,7 @@ export async function signOutAction(data) {
     try {
       await signOut();
       return {
-        message: 'Signing out.',
+        message: 'Signed out.',
         type: 'success',
       };
     } catch (e) {
