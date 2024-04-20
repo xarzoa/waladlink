@@ -74,9 +74,10 @@ export default function Pricing() {
   ];
   return (
     <div>
-      <div className="p-10 py-24 grid place-items-center">
+      <div className="py-24 grid place-items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <div>
+            <div className="absolute w-[20rem] h-10 rounded-lg bg-white blur-[80px]"></div>
             <div className="relative w-[20rem] bg-black p-4 text-neutral-200 border-neutral-900 border space-y-4">
               <div>
                 <div className="font-bold text-2xl">FREE</div>
@@ -107,11 +108,9 @@ export default function Pricing() {
               <div className="grid grid-cols-1">
                 <Button>Get started</Button>
               </div>
-            <div className="absolute w-[20rem] h-10 rounded-lg bg-white blur-[80px]"></div>
             </div>
           </div>
           <div>
-            <div className="absolute w-[20rem] h-10 rounded-lg bg-white blur-3xl"></div>
             <div className="relative w-[20rem] bg-white p-4 text-neutral-800 border-neutral-900 border space-y-4">
               <div>
                 <div className="font-bold text-2xl">PREMIUM</div>
@@ -140,9 +139,12 @@ export default function Pricing() {
                 ))}
               </div>
               <div className="grid grid-cols-1">
-                <Button className="bg-black text-white hover:bg-neutral-800">Get started</Button>
+                <Button className="bg-black text-white hover:bg-neutral-800">
+                  Get started
+                </Button>
               </div>
             </div>
+            <div className="absolute w-[20rem] h-10 rounded-lg bg-white blur-3xl"></div>
           </div>
         </div>
       </div>

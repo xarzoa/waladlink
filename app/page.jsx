@@ -23,12 +23,12 @@ export default function HomePage() {
           <Header display={true} />
           <Landing />
         </div>
-        <div>
-          <Features />
-        </div>
         <div className="flex flex-wrap items-center justify-center shadow-red-lg mb-8 gap-4">
           <BlackTheme />
           <WhiteTheme />
+        </div>
+        <div>
+          <Features />
         </div>
         <div>
           <Pricing />

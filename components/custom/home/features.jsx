@@ -24,14 +24,16 @@ export default function Features() {
   return (
     <div>
       <div className="my-20 mx-14">
-        <div className="grid grid-cols-2 md:grid-cols-4 place-items-center w-full gap-24 sm:gap-32 md:gap-12">
+        <div className="grid grid-cols-subgrid md:grid-cols-4 place-items-center w-full gap-24 sm:gap-32 md:gap-12">
           {features.map((feature, index) => (
-            <div key={index} className='space-y-3'>
-              <div className='grid place-items-center'>
+            <div key={index} className="space-y-3">
+              <div className="grid place-items-center">
                 <div className="absolute w-10 h-10 rounded-lg bg-white blur-2xl hover:animate-ping"></div>
-                <div className="relative">{feature.icon}</div>
+                <div className="relative text-neutral-400">{feature.icon}</div>
               </div>
-              <div className='font-bold font-dmsans'>{feature.info}</div>
+              <div className="font-bold font-mono text-neutral-300">
+                {feature.info}
+              </div>
             </div>
           ))}
         </div>
