@@ -314,17 +314,17 @@ function ThemeBuilder({ theme }) {
                         </FormItem>
                         <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>
+                            <RadioGroupItem value="glass" />
+                          </FormControl>
+                          <FormLabel className="font-normal">Glass</FormLabel>
+                        </FormItem>
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
                             <RadioGroupItem value="graphite" />
                           </FormControl>
                           <FormLabel className="font-normal">
                             Graphite
                           </FormLabel>
-                        </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="glass" />
-                          </FormControl>
-                          <FormLabel className="font-normal">Glass</FormLabel>
                         </FormItem>
                       </RadioGroup>
                     </FormControl>

@@ -49,11 +49,11 @@ export default function Authentication() {
         if (res.type === 'success') {
           form.reset();
         }
-      }else{
-        toast.error("Something went wrong.", {id: toastId})
+      } else {
+        toast.error('Something went wrong.', { id: toastId });
       }
     } catch (e) {
-      toast.error('Something went wrong.', { id: toastId })
+      toast.error('Something went wrong.', { id: toastId });
     }
     setLoading(false);
     setTimeout(() => {

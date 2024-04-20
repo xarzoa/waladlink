@@ -5,6 +5,12 @@ import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/components/ui/hover-card';
+import Link from 'next/link';
 
 export default function GlassTheme({ user }) {
   const [tab, setTab] = useState('info');
@@ -77,7 +83,23 @@ function Info({ user }) {
         <div className="mt-2 font-bold flex align-middle items-center">
           {user.name}
           {user.verified ? (
-            <BadgeCheck className="ml-2 pt-[3px] h-5 w-5" />
+            <HoverCard>
+              <HoverCardTrigger>
+                <BadgeCheck className="ml-2 pt-[3px] h-5 w-5" />
+              </HoverCardTrigger>
+              <HoverCardContent className="rounded-3xl text-sm border-transparent bg-black/70 backdrop-blur-2xl">
+                <div className="text-center">Verified user.</div>
+                <div className="font-normal text-center">
+                  You can get verified by requesting or purchasing one of our paid
+                  plans.
+                </div>
+                <div className="grid w-full grid-cols-1 mt-3">
+                  <Button className="rounded-3xl" asChild>
+                    <Link href="/pricing">Get verified.</Link>
+                  </Button>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
           ) : (
             ''
           )}
@@ -93,7 +115,7 @@ function Info({ user }) {
       )}
       {user.bio ? (
         <div className="shadow-inner py-2 px-4 rounded-3xl text-sm font-light font-mono text-center bg-black/5">
-          <p>{user.bio}</p>
+          <p className="text-wrap truncate">{user.bio}</p>
         </div>
       ) : (
         ''
@@ -104,7 +126,7 @@ function Info({ user }) {
 
 function Wallets({ wallets }) {
   return (
-    <div className="w-full space-y-2 overflow-auto max-h-[26rem] hide-scroll">
+    <div className="w-full space-y-3 overflow-auto max-h-[26rem] hide-scroll pt-2">
       {wallets.map((wallet, index) => (
         <div key={index}>
           <CopyWallet wallet={wallet} />
@@ -119,7 +141,10 @@ function CopyWallet({ wallet }) {
   const hasCopiedText = Boolean(copiedText);
   return (
     <div>
-      <div className="flex align-middle items-center">
+      <div className="flex align-middle items-center relative">
+        <div className="absolute -top-2 bg-black/5 backdrop-blur-xl text-xs px-2 pb-[1px] rounded-[10px] font-semibold font-dmsans">
+          {wallet.name}
+        </div>
         <div className="bg-black/5 p-2 pl-3 rounded-l-3xl w-full hover:bg-black/10 duration-500 select-none truncate">
           {wallet.address}
         </div>
