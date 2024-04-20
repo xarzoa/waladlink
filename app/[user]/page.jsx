@@ -47,16 +47,11 @@ export default async function UserPage({ params }) {
   if (user.banned) {
     return <div className="grid place-items-center">You&apos;re Banned</div>;
   }
-  if (user.theme === 'candy') {
-    return <CandyTheme user={user} />;
+  const themes = {
+    candy: <CandyTheme user={user} />,
+    clouds: <CloudsTheme user={user} />,
+    graphite: <GraphiteTheme user={user} />,
+    glass: <GlassTheme user={user} />,
   }
-  if (user.theme === 'clouds') {
-    return <CloudsTheme user={user} />;
-  }
-  if (user.theme === 'graphite') {
-    return <GraphiteTheme user={user} />;
-  }
-  if (user.theme === 'glass'){
-    return <GlassTheme user={user} />
-  }
+  return themes[user.theme]
 }
