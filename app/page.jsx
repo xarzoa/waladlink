@@ -23,9 +23,11 @@ export default function HomePage() {
           <Header display={true} />
           <Landing />
         </div>
-        <div className="flex flex-wrap items-center justify-center shadow-red-lg mb-8 gap-4">
-          <BlackTheme />
-          <WhiteTheme />
+        <div className="grid place-items-center">
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-14'>
+            <BlackTheme />
+            <WhiteTheme />
+          </div>
         </div>
         <div>
           <Features />

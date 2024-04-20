@@ -24,7 +24,7 @@ export default function Features() {
   return (
     <div>
       <div className="my-20 mx-14">
-        <div className="grid grid-cols-subgrid md:grid-cols-4 place-items-center w-full gap-24 sm:gap-32 md:gap-12">
+        <div className="grid grid-cols-subgrid md:grid-cols-4 place-items-center w-full gap-20">
           {features.map((feature, index) => (
             <div key={index} className="space-y-3">
               <div className="grid place-items-center">

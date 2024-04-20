@@ -74,7 +74,7 @@ export default function Pricing() {
   ];
   return (
     <div>
-      <div className="py-24 grid place-items-center">
+      <div className="py-6 grid place-items-center pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <div>
             <div className="absolute w-[20rem] h-10 rounded-lg bg-white blur-[80px]"></div>
@@ -99,7 +99,7 @@ export default function Pricing() {
                       />
                       {feature.title}
                     </div>
-                    <div className="text-sm font-dmsans">
+                    <div className="text-sm font-dmsans text-neutral-300">
                       {feature.description}
                     </div>
                   </div>
@@ -132,7 +132,7 @@ export default function Pricing() {
                       />
                       {feature.title}
                     </div>
-                    <div className="text-sm font-dmsans">
+                    <div className="text-sm font-dmsans text-neutral-600">
                       {feature.description}
                     </div>
                   </div>

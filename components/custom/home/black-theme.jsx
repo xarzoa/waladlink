@@ -54,7 +54,8 @@ export default function GraphiteTheme() {
       whileHover={{ scale: 1.1, rotate: 3 }}
       transition={{ type: 'spring', bounce: 0.1, duration: 0.5 }}
     >
-      <div className="p-4 rounded-3xl min-h-[30rem] max-h-[30rem] w-[20rem] grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-black text-white border border-neutral-900 shadow-white/5">
+      <div className="absolute w-[20rem] h-[40rem] rounded-lg bg-white/20 blur-3xl"></div>
+      <div className="relative p-4 rounded-3xl min-h-[30rem] max-h-[30rem] w-[20rem] grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-black text-white border border-neutral-900 shadow-white/5">
         <Tabs user={user} tab={tab} />
         <div className="flex gap-2 absolute bottom-0 w-full rounded-3xl justify-evenly duration-500 font-dmsans">
           <button

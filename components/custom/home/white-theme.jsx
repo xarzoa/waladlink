@@ -54,7 +54,8 @@ export default function CloudsTheme() {
       whileHover={{ scale: 1.1, rotate: 3 }}
       transition={{ type: 'spring', bounce: 0.1, duration: 0.5 }}
     >
-      <div className="p-4 rounded-3xl min-h-[30rem] w-[20rem] grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-white text-black border border-neutral-300/60">
+      <div className="absolute w-[20rem] h-10 rounded-lg bg-white blur-[80px] invisible md:visible"></div>
+      <div className="relative p-4 rounded-3xl min-h-[30rem] w-[20rem] grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-white text-black border border-neutral-300/60">
         <Tabs user={user} tab={tab} />
         <div className="flex gap-2 absolute bottom-0 w-full rounded-3xl justify-evenly duration-500 font-dmsans">
           <button
