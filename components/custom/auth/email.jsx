@@ -44,9 +44,13 @@ export default function Authentication() {
     const toastId = toast.loading('Seding the Magic-Link...');
     try {
       const res = await signInAction(data);
-      toast[res.type](res.message, { id: toastId });
-      if (res.type === 'success') {
-        form.reset();
+      if (res) {
+        toast[res.type](res.message, { id: toastId });
+        if (res.type === 'success') {
+          form.reset();
+        }
+      }else{
+        toast.error("Something went wrong.", {id: toastId})
       }
     } catch (e) {
       toast.error('Something went wrong.', { id: toastId })
