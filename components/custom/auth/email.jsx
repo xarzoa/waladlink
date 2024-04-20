@@ -42,10 +42,14 @@ export default function Authentication() {
   async function onSubmit(data) {
     setLoading(true);
     const toastId = toast.loading('Seding the Magic-Link...');
-    const res = await signInAction(data);
-    toast[res.type](res.message, { id: toastId });
-    if (res.type === 'success') {
-      form.reset();
+    try {
+      const res = await signInAction(data);
+      toast[res.type](res.message, { id: toastId });
+      if (res.type === 'success') {
+        form.reset();
+      }
+    } catch (e) {
+      toast.error('Something went wrong.', { id: toastId })
     }
     setLoading(false);
     setTimeout(() => {

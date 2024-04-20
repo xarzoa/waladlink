@@ -4,7 +4,7 @@ import CandyTheme from '@/components/custom/themes/candy';
 import GraphiteTheme from '@/components/custom/themes/graphite';
 
 async function fetchData(user) {
-  const res = await fetch(`${process.env.BASE_URL}/${user}/get`);
+  const res = await fetch(`${process.env.BASE_URL}/${user}/get`, { cache: 'no-store' });
   const data = await res.json();
   return data.data;
 }

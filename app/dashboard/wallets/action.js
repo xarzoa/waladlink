@@ -82,7 +82,7 @@ export async function removeWallet(data) {
       type: 'error',
     };
   }
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   if (session) {
     const userId = session.user.id;
     try {
