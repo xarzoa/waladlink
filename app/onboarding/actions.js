@@ -2,7 +2,7 @@
 import { z } from 'zod';
 import { auth } from '@/lib/auth';
 import { create } from '@/lib/db';
-import { update } from '@/lib/updateAuth';
+import { update } from '@/lib/authDb';
 import { ObjectId } from 'mongodb';
 import { Redis } from '@upstash/redis';
 

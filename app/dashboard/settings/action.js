@@ -1,6 +1,6 @@
 'use server';
 import { z } from 'zod';
-import { update } from '@/lib/updateAuth';
+import { update } from '@/lib/authDb';
 import { ObjectId } from 'mongodb';
 import { auth } from '@/lib/auth';
 
