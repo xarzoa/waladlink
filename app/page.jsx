@@ -1,10 +1,12 @@
-import Info from '@/components/custom/home/info';
-import FAQ from '@/components/custom/home/faq';
+import WhiteTheme from '@/components/custom/home/white-theme';
+import BlackTheme from '@/components/custom/home/black-theme';
+import Features from '@/components/custom/home/features';
 import Landing from '@/components/custom/home/landing';
+import Pricing from '@/components/custom/home/pricing';
 import Header from '@/components/custom/home/header';
-import ProfileCard from '@/components/custom/home/profile-card';
-import WalletsCard from '@/components/custom/home/wallets-card';
+import Info from '@/components/custom/home/info';
 import Footer from '@/components/custom/footer';
+import FAQ from '@/components/custom/home/faq';
 
 export const metadata = {
   title: 'WalAd - All your wallet addresses in one place.',
@@ -21,9 +23,15 @@ export default function HomePage() {
           <Header display={true} />
           <Landing />
         </div>
+        <div>
+          <Features />
+        </div>
         <div className="flex flex-wrap items-center justify-center shadow-red-lg mb-8 gap-4">
-          <ProfileCard background="black" />
-          <WalletsCard background="black" />
+          <BlackTheme />
+          <WhiteTheme />
+        </div>
+        <div>
+          <Pricing />
         </div>
         <Info />
         <FAQ />
