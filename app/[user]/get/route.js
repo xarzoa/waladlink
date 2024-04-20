@@ -11,6 +11,8 @@ export async function GET(request, context) {
             data: {
               name: res.name,
               banned: res.banned,
+              banCase: res.banCase,
+              banId: res.banId
             },
           },
           { status: 200 }

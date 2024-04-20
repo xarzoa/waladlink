@@ -52,10 +52,6 @@ export async function createUser(data) {
           advancedAnalytics: false,
         },
       };
-      const oldUsernames = {
-        _id: new ObjectId(userId),
-        usernames: [data.username],
-      };
       await create('userData', userData, ['username']);
       await update(
         'users',
