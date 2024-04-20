@@ -287,7 +287,7 @@ function ThemeBuilder({ theme }) {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(handleChange)}
-              className="w-2/3 space-y-6"
+              className="w-full space-y-6"
             >
               <FormField
                 control={form.control}
@@ -332,12 +332,15 @@ function ThemeBuilder({ theme }) {
                   </FormItem>
                 )}
               />
-              <SubmitButton
-                disabled={disabled}
-                success={success}
-                loading={loading}
-                childern={'Choose'}
-              />
+              <div className='flex justify-between'>
+                <div></div>
+                <SubmitButton
+                  disabled={disabled}
+                  success={success}
+                  loading={loading}
+                  childern={'Choose'}
+                />
+              </div>
             </form>
           </Form>
         </CardContent>
@@ -420,7 +423,7 @@ function ChangeUsername({ username }) {
   }
 
   async function handleSubmit(data) {
-    const toastId = toast.loading('Creating your account...');
+    const toastId = toast.loading('Updating...');
     setLoading(true);
     const res = await updateUsername(data);
     toast[res.type](res.message, { id: toastId });
