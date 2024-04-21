@@ -10,10 +10,11 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { useUser } from '@/lib/getUser';
+import Link from 'next/link';
+import { User } from 'lucide-react';
 
 export default function DashboardComp({ data }) {
   const { user, error, isLoading } = useUser('/dashboard/get');
-  console.log(user);
   return (
     <main>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 duration-700 mt-3">
@@ -30,6 +31,11 @@ export default function DashboardComp({ data }) {
                 </CardDescription>
               </CardHeader>
             </Card>
+            {isLoading ? (
+              <UserPageSkel />
+            ) : (
+              <UserPage username={user.data.username} />
+            )}
           </div>
           <div></div>
         </div>
@@ -51,6 +57,39 @@ export default function DashboardComp({ data }) {
         </div>
       </div>
     </main>
+  );
+}
+
+function UserPage({ username }) {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Your page is Live!</CardTitle>
+        <CardDescription>
+          <div className="flex items-center my-4">
+            <div className="absolute h-3 w-3 bg-green-400 rounded-full blur-[2px]"></div>
+            <div className="absolute h-4 w-4 bg-green-400 animate-ping blur-sm"></div>
+            <div className="relative ml-5">
+              <Link href={'/' + username}>walad.link/{username}</Link>{' '}
+            </div>
+          </div>
+        </CardDescription>
+      </CardHeader>
+    </Card>
+  );
+}
+
+function UserPageSkel() {
+  return (
+    <Card>
+      <div className="p-4 space-y-4">
+        <Skeleton className="h-8 w-32" />
+        <div>
+          <Skeleton className="absolute h-5 w-5" />
+          <Skeleton className="relative h-5 w-40 mt-3 ml-6" />
+        </div>
+      </div>
+    </Card>
   );
 }
 
