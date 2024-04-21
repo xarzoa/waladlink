@@ -66,10 +66,10 @@ function UserPage({ username }) {
       <CardHeader>
         <CardTitle>Your page is Live!</CardTitle>
         <CardDescription>
-          <div className="flex items-center my-4">
-            <div className="absolute h-3 w-3 bg-green-400 rounded-full blur-[2px]"></div>
-            <div className="absolute h-4 w-4 bg-green-400 animate-ping blur-sm"></div>
-            <div className="relative ml-5">
+          <div className="flex items-center mt-4">
+            <div className="absolute h-3 w-3 bg-green-400 rounded-full blur-[1px]"></div>
+            <div className="absolute h-3 w-3 bg-green-500 rounded-full animate-ping blur-[2px]"></div>
+            <div className="relative ml-5 font-mono font-bold underline">
               <Link href={'/' + username}>walad.link/{username}</Link>{' '}
             </div>
           </div>

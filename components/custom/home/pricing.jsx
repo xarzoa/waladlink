@@ -140,7 +140,7 @@ export default function Pricing() {
               </div>
               <div className="grid grid-cols-1">
                 <Button className="bg-black text-white hover:bg-neutral-800">
-                  Get started
+                  Soon
                 </Button>
               </div>
             </div>
