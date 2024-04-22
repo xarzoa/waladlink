@@ -9,9 +9,9 @@ import Footer from '@/components/custom/footer';
 import FAQ from '@/components/custom/home/faq';
 
 export const metadata = {
-  title: 'WalAd - All your wallet addresses in one place.',
+  title: 'WalAd: Ditch the Messy Crypto Addresses, Share Simply.',
   description:
-    'WalAd is a service that let you put all your wallet addresses in one place and share a link. They tryna simplify the process of sharing long, messy wallet addresses.',
+    'Consolidate your crypto presence with WalAd! Showcase all your wallet addresses in a single, secure link. Just like Linktree for crypto, WalAd lets you share your wallets without ever compromising private keys. Simplify crypto connections. Start using WalAd today!',
   url: 'https://www.walad.link',
 };
 

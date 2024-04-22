@@ -1,6 +1,5 @@
 import '@/styles/globals.css';
 import { Lato } from 'next/font/google';
-import { Fira_Mono } from 'next/font/google';
 import { DM_Sans } from 'next/font/google';
 import { JetBrains_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme';
