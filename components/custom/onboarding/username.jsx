@@ -22,7 +22,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Loader, CircleCheck, ArrowRight } from 'lucide-react';
 import { useDebounce } from '@uidotdev/usehooks';
-import { createUser } from '@/app/onboarding/actions';
+import { createUser } from '@/app/(dashboard)/onboarding/actions';
 import { useRouter } from 'next/navigation';
 
 const usernameSearchSchema = z.object({
