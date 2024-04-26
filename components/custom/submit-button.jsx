@@ -15,7 +15,7 @@ export default function SubmitButton({
       disabled={disabled || loading}
       className={`duration-700 ${
         success
-          ? 'bg-green-500/30 focus:bg-green-500/30 hover:bg-green-500/30 text-green-500'
+          ? 'bg-neutral-500/30 focus:bg-neutral-500/30 hover:bg-neutral-500/30 bg-neutral-500'
           : ''
       }`}
     >

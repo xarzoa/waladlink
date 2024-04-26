@@ -31,7 +31,7 @@ import {
   updateTheme,
   updateAvatar,
   updateUsername,
-} from '@/app/dashboard/profile/action';
+} from '@/app/(dashboard)/dashboard/profile/action';
 import { useDebounce } from '@uidotdev/usehooks';
 import SubmitButton from '../submit-button';
 

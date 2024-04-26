@@ -71,7 +71,7 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        blob: {
+        "blob": {
           "0%": {
             transform: "translate(0px, 0px) scale(1)",
           },
@@ -85,11 +85,47 @@ module.exports = {
             transform: "tranlate(0px, 0px) scale(1)",
           },
         },
+        "scale": {
+          "0%": {
+            transform: "scale(1)",
+          },
+          "10%": {
+            transform: "scale(1.2)",
+          },
+          "20%": {
+            transform: "scale(1.1)",
+          },
+          "30%": {
+            transform: "scale(1.2)",
+          },
+          "40%": {
+            transform: "scale(1)",
+          },
+          "50%": {
+            transform: "scale(1)",
+          },
+          "60%": {
+            transform: "scale(1.1)",
+          },
+          "70%": {
+            transform: "scale(1.2)",
+          },
+          "80%": {
+            transform: "scale(1)",
+          },
+          "90%": {
+            transform: "scale(0.9)",
+          },
+          "100%": {
+            transform: "scale(1)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        blob: "blob 7s infinite",
+        "blob": "blob 7s infinite",
+        "scale": "scale 7s infinite",
       },
     },
   },

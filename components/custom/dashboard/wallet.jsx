@@ -2,17 +2,8 @@
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import { Plus } from 'lucide-react';
 import {
   Dialog,
@@ -38,8 +29,9 @@ import {
   FormMessage,
   FormLabel,
 } from '@/components/ui/form';
-import { addWallet, removeWallet } from '@/app/dashboard/wallets/action';
-import { Loader, CircleCheck } from 'lucide-react';
+import { addWallet, removeWallet } from '@/app/(dashboard)/dashboard/wallets/action';
+import { Loader } from 'lucide-react';
+import SubmitButton from '../submit-button';
 
 const FormSchema = z.object({
   name: z
@@ -55,29 +47,6 @@ const FormSchema = z.object({
     .min(20, { message: 'Address must contain 20+ characters.' })
     .max(48, { message: 'Address cannot exceed 48 characters.' }),
 });
-
-function SubmitButton({ disabled, loading, success }) {
-  return (
-    <Button
-      type="submit"
-      size="icon"
-      disabled={disabled || loading}
-      className={`duration-700 h-10 w-14 ${
-        success
-          ? 'bg-green-500/30 focus:bg-green-500/30 hover:bg-green-500/30 text-green-500'
-          : ''
-      }`}
-    >
-      {loading ? (
-        <Loader className="h-6 w-6 animate-spin" />
-      ) : success ? (
-        <CircleCheck className="h-6 w-6" />
-      ) : (
-        'Add'
-      )}
-    </Button>
-  );
-}
 
 export default function WalletComp() {
   const [sucess, setSuccess] = useState(false);
@@ -194,6 +163,7 @@ export default function WalletComp() {
                     disabled={disabled}
                     success={sucess}
                     loading={loading}
+                    childern={"Add"}
                   />
                 </div>
               </form>
@@ -206,10 +176,16 @@ export default function WalletComp() {
 }
 
 function Wallets({ wallets }) {
+  const [loading, setLoading] = useState(false)
+  const [walletId, setWalletId] = useState(null)
   async function deleteAddress(name, address, id) {
+    setWalletId(id)
+    setLoading(true)
     const toastId = toast.loading('Deleting your wallet...');
     const res = await removeWallet({ name, address, id });
     toast[res.type](res.message, { id: toastId });
+    setWalletId(null)
+    setLoading(false)
   }
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2 mb-12">
@@ -225,14 +201,13 @@ function Wallets({ wallets }) {
             <Button
               size="icon"
               variant="ghost"
-              className="text-red-500/70 hover:bg-red-500/10 focus:bg-red-500/10 focus:text-red-500/70 hover:text-red-500/70"
             >
-              <Trash2
+              { loading && wallet.id === walletId ? (<Loader className="h-5 w-5 animate-spin"/>) : (<Trash2
                 className="h-5 w-5"
                 onClick={() => {
                   deleteAddress(wallet.name, wallet.address, wallet.id);
                 }}
-              />
+              />) }
             </Button>
           </CardContent>
         </Card>

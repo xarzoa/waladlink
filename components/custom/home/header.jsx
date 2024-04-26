@@ -31,9 +31,9 @@ export default function Header() {
       >
         <div className="backdrop-blur-lg bg-black/20 border w-full px-2 pl-4 py-2">
           <div className="w-full font-semibold flex align-middle items-center justify-between text-white">
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 align-middle items-center">
               <Link href="/" className="text-xl font-extrabold">
-                WaladLink
+                WalAd
               </Link>
             </div>
             <div>

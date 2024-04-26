@@ -78,11 +78,11 @@ export default async function UserPage({ params }) {
               <Separator />
               <div className="text-sm font-jbmono text-neutral-400 grid grid-cols-1">
                 <div className="flex">
-                  <pre className="text-neutral-300 font-semibold">Reason</pre>:{' '}
+                  <pre className="text-neutral-300 font-semibold mr-2">Reason:</pre>{' '}
                   <pre>{user.banCase}</pre>
                 </div>
                 <div className="flex">
-                  <pre className="text-neutral-300 font-semibold">Ban Id</pre>:{' '}
+                  <pre className="text-neutral-300 font-semibold mr-2">BanId:</pre>{' '}
                   <pre>{user.banId}</pre>
                 </div>
               </div>

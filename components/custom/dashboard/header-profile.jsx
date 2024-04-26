@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useState } from 'react';
-import { signOutAction } from '@/app/dashboard/action';
+import { signOutAction } from '@/app/(dashboard)/dashboard/action';
 
 function ReuseAvatar({ email, image, name }) {
   return (
@@ -43,7 +43,7 @@ export default function Profile({ path, session }) {
   const [email, setEmail] = useState(session.user.email);
   const doSignOut = async () => {
     const toastId = toast.loading('Siging out...');
-    const res = await signOutAction();
+    await signOutAction();
     toast.info("Signed out.", { id: toastId });
   };
 

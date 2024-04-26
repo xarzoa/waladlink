@@ -3,7 +3,6 @@ import { Navigation, BadgeCheck, Copy, Check } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
 import {
   HoverCard,
   HoverCardContent,
@@ -12,71 +11,30 @@ import {
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function GraphiteTheme() {
+export default function GraphiteTheme({ user }) {
   const [tab, setTab] = useState('info');
-  const user = {
-    avatar:
-      'https://images.ducklabs.xyz/optimize/waladlinkweb/assets/5665d5ff-93f5-49ed-9a80-ea11b3a30e18.png?bucket=ducklabs&width=200&height=200%3Dquality%3D10',
-    name: 'Cloudy Blobs',
-    verified: true,
-    location: 'Moon',
-    bio: "Image quality: Potato. But hey, at least it's not a loading screen... yet.",
-    wallets: [
-      {
-        address: '0x784B2faE5B399dB1343A98dBcA7827eff4B0b411',
-        name: 'DogeBonk',
-      },
-      { address: '0x89765EEdD4D47b87aBCFcb9deFeC28D', name: 'PizzaCoin' },
-      {
-        address: '0xCA3C7c5A9E8cD4248Db64A2bF7Ff56c599E47aDf',
-        name: 'MoonCat',
-      },
-      {
-        address: '0x1D3B2c843aDf3A94c00cD2C5b3c7b7cAaE8D88bE',
-        name: 'LazyCoin',
-      },
-      {
-        address: '0xABc09876DEfGh1jKLmNopqR1234567890',
-        name: 'SockPuppetCoin',
-      },
-      {
-        address: '0xDef1234567890AbCdEfGhIjKlMnOpQrStUvWxYz',
-        name: 'KarenCoin',
-      },
-      { address: '0xFfedcba0987654321AbCdEf0123456789', name: 'FOMOCoin' },
-      { address: '0x1a2B3C4D5E6F7890AbCdEf1234567890', name: 'ScamCoin' },
-      { address: '0x9876543210AbCdEfGhIjKlMnOpQrStUvWxYz', name: 'GlitchCoin' },
-      { address: '0xBA9876543210Fedcba0987654321', name: 'CaffeineCoin' },
-    ],
-  };
   return (
-    <motion.div
-      whileHover={{ scale: 1.1, rotate: 3 }}
-      transition={{ type: 'spring', bounce: 0.1, duration: 0.5 }}
-    >
-      <div className="absolute w-[20rem] h-[40rem] rounded-lg bg-white/20 blur-3xl"></div>
-      <div className="relative p-4 rounded-3xl min-h-[30rem] max-h-[30rem] w-[20rem] grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-black text-white border border-neutral-900 shadow-white/5">
-        <Tabs user={user} tab={tab} />
-        <div className="flex gap-2 absolute bottom-0 w-full rounded-3xl justify-evenly duration-500 font-dmsans">
-          <button
-            onClick={() => setTab('info')}
-            className={`${
-              tab === 'info' ? 'bg-white/5 border-neutral-900' : ''
-            } w-full h-full p-2 rounded-3xl duration-500 border border-transparent`}
-          >
-            Info
-          </button>
-          <button
-            onClick={() => setTab('wallets')}
-            className={`${
-              tab === 'wallets' ? 'bg-white/5 border-neutral-900' : ''
-            } w-full h-full p-2 rounded-3xl duration-500 border border-transparent`}
-          >
-            Wallets
-          </button>
-        </div>
+    <div className={`relative p-4 rounded-3xl h-[24rem] w-[16rem] grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-black text-white border border-neutral-900 shadow-white/20 rotate-6 md:rotate-12`}>
+      <Tabs user={user} tab={tab} />
+      <div className="flex gap-2 absolute bottom-0 w-full rounded-3xl justify-evenly duration-500 font-dmsans bg-black/60 backdrop-blur-lg">
+        <button
+          onClick={() => setTab('info')}
+          className={`${
+            tab === 'info' ? 'bg-white/5 border-neutral-900' : ''
+          } w-full h-full p-2 rounded-3xl duration-500 border border-transparent`}
+        >
+          Info
+        </button>
+        <button
+          onClick={() => setTab('wallets')}
+          className={`${
+            tab === 'wallets' ? 'bg-white/5 border-neutral-900' : ''
+          } w-full h-full p-2 rounded-3xl duration-500 border border-transparent`}
+        >
+          Wallets
+        </button>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -84,7 +42,7 @@ function Info({ user }) {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 place-items-center">
-        <Avatar className="h-32 w-32 rounded-3xl">
+        <Avatar className="h-24 w-24 rounded-3xl">
           <AvatarImage
             src={user.avatar ? `${user.avatar}&width=128&height=128` : ''}
             alt={`${user.name}'s profile picture.`}
@@ -139,7 +97,7 @@ function Info({ user }) {
 
 function Wallets({ wallets }) {
   return (
-    <div className="w-full space-y-3 overflow-auto max-h-[26rem] hide-scroll pt-2">
+    <div className="w-full space-y-3 overflow-auto max-h-[20rem] hide-scroll pt-2">
       {wallets.map((wallet, index) => (
         <div key={index}>
           <CopyWallet wallet={wallet} />
@@ -154,7 +112,7 @@ function CopyWallet({ wallet }) {
   const hasCopiedText = Boolean(copiedText);
   return (
     <div>
-      <div className="flex align-middle items-center border border-neutral-900 rounded-3xl relative">
+      <div className="flex align-middle items-center border border-neutral-900 rounded-3xl relative text-sm">
         <div className="absolute -top-2 bg-white/5 backdrop-blur-xl text-xs px-2 pb-[1px] rounded-[10px] font-semibold font-dmsans">
           {wallet.name}
         </div>

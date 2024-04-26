@@ -1,7 +1,6 @@
 'use client';
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -11,7 +10,6 @@ import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { useUser } from '@/lib/getUser';
 import Link from 'next/link';
-import { User } from 'lucide-react';
 
 export default function DashboardComp({ data }) {
   const { user, error, isLoading } = useUser('/dashboard/get');
@@ -67,8 +65,8 @@ function UserPage({ username }) {
         <CardTitle>Your page is Live!</CardTitle>
         <CardDescription>
           <div className="flex items-center mt-4">
-            <div className="absolute h-3 w-3 bg-green-400 rounded-full blur-[1px]"></div>
-            <div className="absolute h-3 w-3 bg-green-500 rounded-full animate-ping blur-[2px]"></div>
+            <div className="absolute h-3 w-3 bg-white rounded-full blur-[1px]"></div>
+            <div className="absolute h-3 w-3 bg-white rounded-full animate-ping blur-[2px]"></div>
             <div className="relative ml-5 font-mono font-bold underline">
               <Link href={'/' + username}>walad.link/{username}</Link>{' '}
             </div>
@@ -171,7 +169,7 @@ function Subscription({ email, user }) {
           {user.data.plan === 'FREE' ? (
             <>
               <div className="flex flex-wrap gap-2">
-                <div className="font-bold bg-green-300 bg-opacity-10 p-2 w-full">
+                <div className="font-bold bg-neutral-300 bg-opacity-10 p-2 w-full">
                   <div className="text-2xl">Free</div>
                 </div>
               </div>

@@ -18,7 +18,7 @@ export async function signInAction(data) {
     };
   }
   try {
-    await signIn('resend', { email: data.email, redirect: false, callbackUrl: '/dashboard' });
+    await signIn('resend', { email: data.email, redirect: false });
     return {
       message: 'We sent you the magic-link.',
       type: 'success',

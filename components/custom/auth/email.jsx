@@ -1,6 +1,10 @@
 'use client';
+import { z } from 'zod';
+import { toast } from 'sonner';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
+import { Loader, CircleCheck } from 'lucide-react';
 import {
   Form,
   FormControl,
@@ -8,8 +12,8 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-import {
-  Card,
+  import {
+    Card,
   CardContent,
   CardDescription,
   CardFooter,
@@ -17,12 +21,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
+import { signInAction } from '@/app/(auth)/auth/action';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { Loader, CircleCheck } from 'lucide-react';
-import { signInAction } from '@/app/auth/action';
 
 const FormSchema = z.object({
   email: z.string().email(),
@@ -41,7 +41,7 @@ export default function Authentication() {
 
   async function onSubmit(data) {
     setLoading(true);
-    const toastId = toast.loading('Seding the Magic-Link...');
+    const toastId = toast.loading('Sending the Magic-Link...');
     try {
       const res = await signInAction(data);
       if (res) {
@@ -91,7 +91,7 @@ export default function Authentication() {
                   disabled={disabled || loading}
                   className={`duration-700 w-full ${
                     disabled
-                      ? 'bg-green-500/30 focus:bg-green-500/30 hover:bg-green-500/30 text-green-500'
+                      ? 'bg-neutral-500/30 focus:bg-neutral-500/30 hover:bg-neutral-500/30 bg-neutral-500'
                       : ''
                   }`}
                 >
@@ -108,7 +108,7 @@ export default function Authentication() {
           </CardContent>
           <CardFooter>
             <p className="text-xs">
-              By signing up, you agree to our <a href="https://ducklabs.notion.site/Privacy-Policy-a8e564f73c574d09bb5f62a991dfd659" target="_blank" rel="noopener noreferrer">Terms</a> & <a href="https://ducklabs.notion.site/Terms-of-Service-af4b00d8fb184f1fbb9019e169790863?pvs=4" target="_blank" rel="noopener noreferrer">Privacy</a>.
+              By signing up, you agree to our <a className='underline' href="https://ducklabs.notion.site/Privacy-Policy-a8e564f73c574d09bb5f62a991dfd659" target="_blank" rel="noopener noreferrer">Terms</a> & <a className='underline'href="https://ducklabs.notion.site/Terms-of-Service-af4b00d8fb184f1fbb9019e169790863?pvs=4" target="_blank" rel="noopener noreferrer">Privacy</a>.
             </p>
           </CardFooter>
         </Card>

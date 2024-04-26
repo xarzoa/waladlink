@@ -55,9 +55,8 @@ export default function RootLayout({ children }) {
         >
           {children}
           <Toaster
-            richColors
             toastOptions={{
-              className: 'rounded-none',
+              className: 'rounded-none backdrop-blur-lg bg-black/20',
             }}
           />
         </ThemeProvider>

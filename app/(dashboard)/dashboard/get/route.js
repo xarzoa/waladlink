@@ -3,7 +3,7 @@ import { get } from '@/lib/db';
 import { ObjectId } from 'mongodb';
 import { auth } from '@/lib/auth';
 
-export async function GET(request, context) {
+export async function GET() {
   const session = await auth();
   if (session) {
     try {
