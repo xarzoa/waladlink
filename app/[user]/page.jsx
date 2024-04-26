@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 async function fetchData(user) {
   const res = await fetch(`${process.env.BASE_URL}/${user}/get`, {
-    cache: 'no-store',
+    next: { revalidate: 60 }
   });
   const data = await res.json();
   return data.data;
