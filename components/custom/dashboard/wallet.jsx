@@ -1,8 +1,5 @@
 'use client';
-import {
-  Card,
-  CardContent,
-} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import {
@@ -29,7 +26,10 @@ import {
   FormMessage,
   FormLabel,
 } from '@/components/ui/form';
-import { addWallet, removeWallet } from '@/app/(dashboard)/dashboard/wallets/action';
+import {
+  addWallet,
+  removeWallet,
+} from '@/app/(dashboard)/dashboard/wallets/action';
 import { Loader } from 'lucide-react';
 import SubmitButton from '../submit-button';
 
@@ -163,7 +163,7 @@ export default function WalletComp() {
                     disabled={disabled}
                     success={sucess}
                     loading={loading}
-                    childern={"Add"}
+                    childern={'Add'}
                   />
                 </div>
               </form>
@@ -176,16 +176,16 @@ export default function WalletComp() {
 }
 
 function Wallets({ wallets }) {
-  const [loading, setLoading] = useState(false)
-  const [walletId, setWalletId] = useState(null)
+  const [loading, setLoading] = useState(false);
+  const [walletId, setWalletId] = useState(null);
   async function deleteAddress(name, address, id) {
-    setWalletId(id)
-    setLoading(true)
+    setWalletId(id);
+    setLoading(true);
     const toastId = toast.loading('Deleting your wallet...');
     const res = await removeWallet({ name, address, id });
     toast[res.type](res.message, { id: toastId });
-    setWalletId(null)
-    setLoading(false)
+    setWalletId(null);
+    setLoading(false);
   }
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2 mb-12">
@@ -198,16 +198,17 @@ function Wallets({ wallets }) {
                 {wallet.address}
               </div>
             </div>
-            <Button
-              size="icon"
-              variant="ghost"
-            >
-              { loading && wallet.id === walletId ? (<Loader className="h-5 w-5 animate-spin"/>) : (<Trash2
-                className="h-5 w-5"
-                onClick={() => {
-                  deleteAddress(wallet.name, wallet.address, wallet.id);
-                }}
-              />) }
+            <Button size="icon" variant="ghost">
+              {loading && wallet.id === walletId ? (
+                <Loader className="h-5 w-5 animate-spin" />
+              ) : (
+                <Trash2
+                  className="h-5 w-5"
+                  onClick={() => {
+                    deleteAddress(wallet.name, wallet.address, wallet.id);
+                  }}
+                />
+              )}
             </Button>
           </CardContent>
         </Card>

@@ -9,7 +9,7 @@ export default async function DashboardLayout({ children }) {
   if (!session) {
     redirect('/auth');
   }
-  if(session.user.banned){
+  if (session.user.banned) {
     return (
       <div>
         <div className="grid place-items-center min-h-screen">
@@ -24,8 +24,14 @@ export default async function DashboardLayout({ children }) {
             <div>
               <Separator />
               <div className="text-sm font-jbmono text-neutral-400 grid grid-cols-1">
-                <div className='flex'><pre className='text-neutral-300 font-semibold'>Reason</pre>: {session.user.banCase}</div>
-                <div className='flex'><pre className='text-neutral-300 font-semibold'>Ban Id</pre>: {session.user.banId}</div>
+                <div className="flex">
+                  <pre className="text-neutral-300 font-semibold">Reason</pre>:{' '}
+                  {session.user.banCase}
+                </div>
+                <div className="flex">
+                  <pre className="text-neutral-300 font-semibold">Ban Id</pre>:{' '}
+                  {session.user.banId}
+                </div>
               </div>
             </div>
             <div className="grid grid-cols-1">

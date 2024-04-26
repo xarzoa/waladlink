@@ -69,8 +69,8 @@ function Info({ user }) {
               <HoverCardContent className="bg-white/20 backdrop-blur-lg rounded-3xl text-sm border-neutral-300/60 text-black">
                 <div className="text-center">Verified user.</div>
                 <div className="font-normal text-center">
-                  You can get verified by requesting or purchasing one of our paid
-                  plans.
+                  You can get verified by requesting or purchasing one of our
+                  paid plans.
                 </div>
                 <div className="grid w-full grid-cols-1 mt-3">
                   <Button className="rounded-3xl" asChild>

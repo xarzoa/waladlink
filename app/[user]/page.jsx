@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 async function fetchData(user) {
   const res = await fetch(`${process.env.BASE_URL}/${user}/get`, {
-    next: { revalidate: 60 }
+    next: { revalidate: 60 },
   });
   const data = await res.json();
   return data.data;
@@ -78,11 +78,15 @@ export default async function UserPage({ params }) {
               <Separator />
               <div className="text-sm font-jbmono text-neutral-400 grid grid-cols-1">
                 <div className="flex">
-                  <pre className="text-neutral-300 font-semibold mr-2">Reason:</pre>{' '}
+                  <pre className="text-neutral-300 font-semibold mr-2">
+                    Reason:
+                  </pre>{' '}
                   <pre>{user.banCase}</pre>
                 </div>
                 <div className="flex">
-                  <pre className="text-neutral-300 font-semibold mr-2">BanId:</pre>{' '}
+                  <pre className="text-neutral-300 font-semibold mr-2">
+                    BanId:
+                  </pre>{' '}
                   <pre>{user.banId}</pre>
                 </div>
               </div>

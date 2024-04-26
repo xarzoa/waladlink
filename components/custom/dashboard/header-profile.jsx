@@ -44,7 +44,7 @@ export default function Profile({ path, session }) {
   const doSignOut = async () => {
     const toastId = toast.loading('Siging out...');
     await signOutAction();
-    toast.info("Signed out.", { id: toastId });
+    toast.info('Signed out.', { id: toastId });
   };
 
   return (

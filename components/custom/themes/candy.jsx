@@ -63,22 +63,22 @@ function Info({ user }) {
           {user.name}
           {user.verified ? (
             <HoverCard>
-            <HoverCardTrigger>
-              <BadgeCheck className="ml-2 pt-[3px] h-5 w-5" />
-            </HoverCardTrigger>
-            <HoverCardContent className="bg-[#FFAFCC]/70 border-[#FFAFCC] backdrop-blur-lg rounded-3xl text-sm">
-              <div className="text-center">Verified user.</div>
-              <div className="font-normal text-center">
-                You can get verified by requesting or purchasing one of our paid
-                plans.
-              </div>
-              <div className="grid w-full grid-cols-1 mt-3">
-                <Button className="rounded-3xl" asChild>
-                  <Link href="/pricing">Get verified.</Link>
-                </Button>
-              </div>
-            </HoverCardContent>
-          </HoverCard>
+              <HoverCardTrigger>
+                <BadgeCheck className="ml-2 pt-[3px] h-5 w-5" />
+              </HoverCardTrigger>
+              <HoverCardContent className="bg-[#FFAFCC]/70 border-[#FFAFCC] backdrop-blur-lg rounded-3xl text-sm">
+                <div className="text-center">Verified user.</div>
+                <div className="font-normal text-center">
+                  You can get verified by requesting or purchasing one of our
+                  paid plans.
+                </div>
+                <div className="grid w-full grid-cols-1 mt-3">
+                  <Button className="rounded-3xl" asChild>
+                    <Link href="/pricing">Get verified.</Link>
+                  </Button>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
           ) : (
             ''
           )}
@@ -94,7 +94,7 @@ function Info({ user }) {
       )}
       {user.bio ? (
         <div className="shadow-inner py-2 px-4 rounded-3xl text-sm font-light font-mono text-center bg-[#BDE0FE]/40">
-          <p className='text-wrap truncate'>{user.bio}</p>
+          <p className="text-wrap truncate">{user.bio}</p>
         </div>
       ) : (
         ''

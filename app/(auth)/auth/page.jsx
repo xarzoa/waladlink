@@ -8,7 +8,7 @@ export const metadata = {
   url: 'https://www.ducklabs.xyz',
 };
 
-export const dynamic = "force-dynamic"
+export const dynamic = 'force-dynamic';
 
 export default async function Auth() {
   try {

@@ -12,8 +12,8 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-  import {
-    Card,
+import {
+  Card,
   CardContent,
   CardDescription,
   CardFooter,
@@ -108,7 +108,25 @@ export default function Authentication() {
           </CardContent>
           <CardFooter>
             <p className="text-xs">
-              By signing up, you agree to our <a className='underline' href="https://ducklabs.notion.site/Privacy-Policy-a8e564f73c574d09bb5f62a991dfd659" target="_blank" rel="noopener noreferrer">Terms</a> & <a className='underline'href="https://ducklabs.notion.site/Terms-of-Service-af4b00d8fb184f1fbb9019e169790863?pvs=4" target="_blank" rel="noopener noreferrer">Privacy</a>.
+              By signing up, you agree to our{' '}
+              <a
+                className="underline"
+                href="https://ducklabs.notion.site/Privacy-Policy-a8e564f73c574d09bb5f62a991dfd659"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Terms
+              </a>{' '}
+              &{' '}
+              <a
+                className="underline"
+                href="https://ducklabs.notion.site/Terms-of-Service-af4b00d8fb184f1fbb9019e169790863?pvs=4"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Privacy
+              </a>
+              .
             </p>
           </CardFooter>
         </Card>

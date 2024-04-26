@@ -1,4 +1,4 @@
-import DashboardComp from "@/components/custom/dashboard/dashboard";
+import DashboardComp from '@/components/custom/dashboard/dashboard';
 import { auth } from '@/lib/auth';
 
 export const metadata = {
@@ -8,10 +8,10 @@ export const metadata = {
 };
 
 export default async function Dashboard() {
-  const session = await auth()
+  const session = await auth();
   return (
     <main>
-      <DashboardComp data={session.user}/>
+      <DashboardComp data={session.user} />
     </main>
   );
 }

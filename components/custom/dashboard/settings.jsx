@@ -23,7 +23,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import SubmitButton from '../submit-button';
-import { updateAvatar, updateInfo } from '@/app/(dashboard)/dashboard/settings/action';
+import {
+  updateAvatar,
+  updateInfo,
+} from '@/app/(dashboard)/dashboard/settings/action';
 
 const FormSchema = z.object({
   name: z.string(),

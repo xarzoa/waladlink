@@ -14,7 +14,9 @@ import { useState } from 'react';
 export default function GraphiteTheme({ user }) {
   const [tab, setTab] = useState('info');
   return (
-    <div className={`relative p-4 rounded-3xl h-[24rem] w-[16rem] grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-black text-white border border-neutral-900 shadow-white/20 rotate-6 md:rotate-12`}>
+    <div
+      className={`relative p-4 rounded-3xl h-[24rem] w-[16rem] grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-black text-white border border-neutral-900 shadow-white/20 rotate-6 md:rotate-12`}
+    >
       <Tabs user={user} tab={tab} />
       <div className="flex gap-2 absolute bottom-0 w-full rounded-3xl justify-evenly duration-500 font-dmsans bg-black/60 backdrop-blur-lg">
         <button

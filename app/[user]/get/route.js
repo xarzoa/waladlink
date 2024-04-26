@@ -12,7 +12,7 @@ export async function GET(request, context) {
               name: res.name,
               banned: res.banned,
               banCase: res.banCase,
-              banId: res.banId
+              banId: res.banId,
             },
           },
           { status: 200 }

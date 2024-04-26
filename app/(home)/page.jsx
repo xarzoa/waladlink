@@ -54,10 +54,10 @@ export default function HomePage() {
 
   const bragging = [
     "Your data? Safer than the Ark of the Covenant... with Wi-Fi! (We don't sell it, pinky swear.)",
-    "Login with your email? Revolutionary! No passwords? Groundbreaking!",
+    'Login with your email? Revolutionary! No passwords? Groundbreaking!',
     "You control who sees your stuff? Woah, such power! (Public by default, but hey, search engines won't find you... like Bigfoot at a spelling bee.)",
     "We're fast! Like a greased mongoose on roller skates. (Okay, maybe not *that* fast, but still faster than dial-up.)",
-  ];  
+  ];
   return (
     <main className="mt-20 relative">
       <div className="absolute -left-96 -top-96 h-[50vw] w-14 bg-white/50 blur-[80px] rotate-45 -z-20"></div>
@@ -72,21 +72,25 @@ export default function HomePage() {
         <div className="grid place-items-center m-12">
           <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 font-bold font-serif divide-solid md:divide-none divide-y">
             {bragging.map((brag, index) => (
-              <li key={index} className='pt-3'>{brag}</li>
+              <li key={index} className="pt-3">
+                {brag}
+              </li>
             ))}
           </ul>
         </div>
         <div className="grid m-16 p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 space-y-6">
-            <div className='place-self-center'>
-              <BlackTheme user={user}/>
+            <div className="place-self-center">
+              <BlackTheme user={user} />
             </div>
-            <div className='place-self-center'>
-              <WhiteTheme user={user}/>
+            <div className="place-self-center">
+              <WhiteTheme user={user} />
             </div>
           </div>
         </div>
-        <div><Features /></div>
+        <div>
+          <Features />
+        </div>
         <div>
           <Pricing />
         </div>

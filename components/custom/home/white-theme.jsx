@@ -67,7 +67,11 @@ function Info({ user }) {
                   paid plans.
                 </div>
                 <div className="grid w-full grid-cols-1 mt-3">
-                  <Button className="rounded-3xl text-white" variant="outline" asChild>
+                  <Button
+                    className="rounded-3xl text-white"
+                    variant="outline"
+                    asChild
+                  >
                     <Link href="/pricing">Get verified.</Link>
                   </Button>
                 </div>

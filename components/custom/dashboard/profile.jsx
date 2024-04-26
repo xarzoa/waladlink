@@ -332,7 +332,7 @@ function ThemeBuilder({ theme }) {
                   </FormItem>
                 )}
               />
-              <div className='flex justify-between'>
+              <div className="flex justify-between">
                 <div></div>
                 <SubmitButton
                   disabled={disabled}
