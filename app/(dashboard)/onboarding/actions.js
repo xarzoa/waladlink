@@ -37,10 +37,6 @@ export async function createUser(data) {
     });
     const userId = session.user.id;
     try {
-      const username = {
-        username: data.username,
-        _id: new ObjectId(userId),
-      };
       const userData = {
         _id: new ObjectId(userId),
         username: data.username,

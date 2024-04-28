@@ -210,6 +210,7 @@ function BasicInfo({ info }) {
                     success={success}
                     loading={loading}
                     childern={'Save'}
+                    type="submit"
                   />
                 </div>
               </form>
@@ -339,6 +340,7 @@ function ThemeBuilder({ theme }) {
                   success={success}
                   loading={loading}
                   childern={'Choose'}
+                  type="submit"
                 />
               </div>
             </form>
@@ -482,6 +484,7 @@ function ChangeUsername({ username }) {
                         success={success}
                         loading={loading}
                         childern={'Change'}
+                        type="submit"
                       />
                     </div>
                   </FormItem>

@@ -86,12 +86,12 @@ export default function SettingsComp({ data }) {
 
   return (
     <div className="mt-3">
-      <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
         <Card>
           <CardHeader>
-            <CardTitle>Name</CardTitle>
+            <CardTitle>DuckPass Profile</CardTitle>
             <CardDescription>
-              Edit your name. (Only visible to you.)
+              Edit your DuckPass profile. (Only visible to you.)
             </CardDescription>
           </CardHeader>
           <CardContent className="grid w-full lg:grid-cols-2 md:grid-cols-2 items-center gap-2">
@@ -144,12 +144,29 @@ export default function SettingsComp({ data }) {
                     success={success}
                     loading={loading}
                     childern={'Save'}
+                    type="submit"
                   />
                 </div>
               </form>
             </Form>
           </CardContent>
         </Card>
+        {/* <div>
+          <Card>
+            <CardHeader>
+              <CardTitle>Delete your Account</CardTitle>
+              <CardDescription>
+                Delete your DuckPass, WalAd account and all data.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className='flex justify-between'>
+                <div></div>
+                <SubmitButton childern={"Delete"}/>
+              </div>
+            </CardContent>
+          </Card>
+        </div> */}
       </div>
     </div>
   );

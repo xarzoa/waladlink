@@ -164,6 +164,7 @@ export default function WalletComp() {
                     success={sucess}
                     loading={loading}
                     childern={'Add'}
+                    type="submit"
                   />
                 </div>
               </form>

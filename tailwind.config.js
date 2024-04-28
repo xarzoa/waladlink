@@ -18,9 +18,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        lato: "var(--font-lato)",
-        dmsans: "var(--font-dm_sans)",
-        jbmono: "var(--font-jb_mono)"
+        jbmono: "var(--font-jb_mono)",
+        gabarito: "var(--font-gabarito)",
+        dmsans: "var(--font-dmsans)",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -85,6 +85,17 @@ module.exports = {
             transform: "tranlate(0px, 0px) scale(1)",
           },
         },
+        "preview": {
+          "0%": {
+            transform: "translate(0px, 0px)",
+          },
+          "33%": {
+            transform: "translate(0px, -10px)",
+          },
+          "66%": {
+            transform: "translate(0px, 10px)",
+          },
+        },
         "scale": {
           "0%": {
             transform: "scale(1)",
@@ -126,6 +137,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "blob": "blob 7s infinite",
         "scale": "scale 7s infinite",
+        "preview": "preview 5s infinite"
       },
     },
   },

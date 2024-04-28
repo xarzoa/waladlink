@@ -1,12 +1,12 @@
 import WhiteTheme from '@/components/custom/home/white-theme';
 import BlackTheme from '@/components/custom/home/black-theme';
-import Features from '@/components/custom/home/features';
 import Landing from '@/components/custom/home/landing';
 import Pricing from '@/components/custom/home/pricing';
 import Header from '@/components/custom/home/header';
 import Info from '@/components/custom/home/info';
 import Footer from '@/components/custom/footer';
 import FAQ from '@/components/custom/home/faq';
+import Previews from '@/components/custom/home/previews';
 
 export const metadata = {
   title: 'WalAd: Ditch the Messy Crypto Addresses, Share Simply.',
@@ -22,7 +22,7 @@ export default function HomePage() {
     name: 'Cloudy Blobs',
     verified: true,
     location: 'Moon',
-    bio: "Image quality: Potato. But hey, at least it's not a loading screen... yet.",
+    bio: `Challenging the concept of "form" since the dawn of time. One ooze at a time. 🫠`,
     wallets: [
       {
         address: '0x784B2faE5B399dB1343A98dBcA7827eff4B0b411',
@@ -53,9 +53,9 @@ export default function HomePage() {
   };
 
   const bragging = [
-    "Your data? Safer than the Ark of the Covenant... with Wi-Fi! (We don't sell it, pinky swear.)",
-    'Login with your email? Revolutionary! No passwords? Groundbreaking!',
-    "You control who sees your stuff? Woah, such power! (Public by default, but hey, search engines won't find you... like Bigfoot at a spelling bee.)",
+    'Your data? Safer than the Ark of the Covenant... (We never sell them, pinky swear.)',
+    'Login with your email? Revolutionary! No passwords, Piece of cake, Groundbreaking! ',
+    "You control who sees your stuff? Woah, such power! (Public by default, but hey, search engines won't find you... like Bigfoot.)",
     "We're fast! Like a greased mongoose on roller skates. (Okay, maybe not *that* fast, but still faster than dial-up.)",
   ];
   return (
@@ -68,28 +68,30 @@ export default function HomePage() {
         <div>
           <Header display={true} />
           <Landing />
+          <Previews />
         </div>
-        <div className="grid place-items-center m-12">
-          <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 font-bold font-serif divide-solid md:divide-none divide-y">
+        <div className="grid place-items-center lg:m-12 m-6">
+          <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 font-semibold font-dmsans divide-solid md:divide-none divide-y list-disc md:text-lg text-neutral-400">
             {bragging.map((brag, index) => (
-              <li key={index} className="pt-3">
+              <li key={index} className="pt-3 max-w-lg m-4">
                 {brag}
               </li>
             ))}
           </ul>
         </div>
-        <div className="grid m-16 p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 space-y-6">
-            <div className="place-self-center">
-              <BlackTheme user={user} />
+        <div className="grid mx-6 py-16">
+          <div className="grid place-items-center relative">
+            <div className="animate-preview delay-700">
+              <div className="blur-lg hover:blur-none hover:scale-105 duration-500">
+                <WhiteTheme user={user} />
+              </div>
             </div>
-            <div className="place-self-center">
-              <WhiteTheme user={user} />
+            <div className="animate-preview absolute">
+              <div className="hover:scale-105 duration-500">
+                <BlackTheme user={user} />
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          <Features />
         </div>
         <div>
           <Pricing />

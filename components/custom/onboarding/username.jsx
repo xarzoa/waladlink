@@ -164,7 +164,7 @@ function SubmitButton({ disabled, loading, success }) {
       disabled={disabled || loading}
       className={`duration-700 h-10 w-14 ${
         success
-          ? 'bg-green-500/30 focus:bg-green-500/30 hover:bg-green-500/30 text-green-500'
+          ? 'bg-neutral-500/30 focus:bg-neutral-500/30 hover:bg-neutral-500/30 bg-neutral-500'
           : ''
       }`}
     >

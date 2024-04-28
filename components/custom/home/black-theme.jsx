@@ -118,7 +118,7 @@ function CopyWallet({ wallet }) {
         <div className="absolute -top-2 bg-white/5 backdrop-blur-xl text-xs px-2 pb-[1px] rounded-[10px] font-semibold font-dmsans">
           {wallet.name}
         </div>
-        <div className="bg-white/5 p-2 pl-3 rounded-l-3xl w-full hover:bg-white/10 duration-500 select-none truncate">
+        <div className="bg-white/5 p-2 pl-3 rounded-l-3xl w-full hover:bg-white/10 duration-500 select-none truncate font-jbmono">
           {wallet.address}
         </div>
         <div>

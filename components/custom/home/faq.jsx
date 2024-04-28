@@ -37,7 +37,7 @@ export default function FAQ() {
     },
   ];
   return (
-    <div className="bg-gradient-to-b from-neutral-900 to-black rounded-none">
+    <div className="bg-gradient-to-b from-neutral-900 to-black rounded-none font-gabarito">
       <div>
         <Accordion
           type="single"
@@ -46,10 +46,10 @@ export default function FAQ() {
         >
           {faqs.map((faq, index) => (
             <AccordionItem value={`item-${index + 1}`} key={index}>
-              <AccordionTrigger className="text-start">
+              <AccordionTrigger className="text-start font-semibold text-neutral-300">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent>{faq.answer}</AccordionContent>
+              <AccordionContent className="text-neutral-400">{faq.answer}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

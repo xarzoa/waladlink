@@ -32,12 +32,12 @@ export default function Header() {
         <div className="backdrop-blur-lg bg-black/20 border w-full px-2 pl-4 py-2">
           <div className="w-full font-semibold flex align-middle items-center justify-between text-white">
             <div className="flex space-x-4 align-middle items-center">
-              <Link href="/" className="text-xl font-extrabold">
-                WalAd
+              <Link href="/" className="text-xl font-extrabold group">
+                <span className={`group-hover:after:content-['let'] duration-500`}>Wal</span><span className={`group-hover:after:content-['dresses'] group-hover:ml-2 duration-500 text-neutral-300`}>Ad</span>
               </Link>
             </div>
             <div>
-              <Button asChild className="font-bold text-lg rounded-none">
+              <Button asChild className="font-bold text-lg">
                 <Link href="/auth">Login</Link>
               </Button>
             </div>

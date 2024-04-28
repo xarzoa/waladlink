@@ -7,17 +7,18 @@ export default function SubmitButton({
   loading,
   success,
   size,
+  className,
+  ...props
 }) {
   return (
     <Button
-      type="submit"
       size={size || ''}
       disabled={disabled || loading}
       className={`duration-700 ${
         success
           ? 'bg-neutral-500/30 focus:bg-neutral-500/30 hover:bg-neutral-500/30 bg-neutral-500'
           : ''
-      }`}
+      } ${className}`} {...props}
     >
       {loading ? (
         <Loader className="h-6 w-6 animate-spin" />

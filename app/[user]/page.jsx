@@ -27,7 +27,7 @@ export async function generateMetadata({ params }) {
     };
   }
   return {
-    title: `${user.name}'s wal-adds`,
+    title: `${user.name}'s wal-adds.`,
     icons: {
       icon: {
         url:
@@ -54,7 +54,7 @@ export default async function UserPage({ params }) {
             </div>
             <div className="grid place-items-center">
               <Button className="mt-4 pb-2" asChild>
-                <Link href="/auth">Claim it</Link>
+                <Link href="/auth">Claim this username</Link>
               </Button>
             </div>
           </div>

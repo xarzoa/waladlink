@@ -5,10 +5,6 @@ export const config = {
 
 export default function Middleware(req) {
   const url = req.nextUrl;
-  const hostname = req.headers.get('host');
-  const host = hostname
-    .replace(`.ducklabs.xyz`, '')
-    .replace(`.localhost:3000`, '');
   const cookies =
     req.cookies.get('next-auth.session-token') ||
     req.cookies.get('__Secure-next-auth.session-token') ||

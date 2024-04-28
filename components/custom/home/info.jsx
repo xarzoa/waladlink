@@ -5,7 +5,7 @@ export default function Info() {
     <div className="info-bg rounded-none relative">
       <div className="h-20 w-full bg-black blur-lg absolute -top-5"></div>
       <div className="h-20 w-full bg-black blur-sm absolute -top-2"></div>
-      <div className="grid grid-cols-1 md:grid-cols-2 place-items-start cursor-help text-gray-400 backdrop-blur-3xl divide-solid md:divide-none divide-y">
+      <div className="grid grid-cols-1 md:grid-cols-2 place-items-start cursor-help text-neutral-400 backdrop-blur-3xl divide-solid md:divide-none divide-y font-semibold font-gabarito">
         <div className="text-md p-6">
           Tired of copy-pasting your wallet address like you're playing DDR on
           expert mode? (We feel you.) WalAd is your shortcut to crypto fame.
