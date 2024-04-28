@@ -82,7 +82,7 @@ export default function HomePage() {
         <div className="grid mx-6 py-16">
           <div className="grid place-items-center relative">
             <div className="animate-preview delay-700">
-              <div className="blur-lg hover:blur-none hover:scale-105 duration-500">
+              <div className="blur-sm hover:blur-none hover:scale-105 duration-500">
                 <WhiteTheme user={user} />
               </div>
             </div>

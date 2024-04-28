@@ -33,7 +33,7 @@ export default function Header() {
           <div className="w-full font-semibold flex align-middle items-center justify-between text-white">
             <div className="flex space-x-4 align-middle items-center">
               <Link href="/" className="text-xl font-extrabold group">
-                <span className={`group-hover:after:content-['let'] duration-500`}>Wal</span><span className={`group-hover:after:content-['dresses'] group-hover:ml-2 duration-500 text-neutral-300`}>Ad</span>
+                <span className={`group-hover:after:content-['let'] duration-500`}>Wal</span><span className={`group-hover:after:content-['dresses.'] group-hover:ml-2 duration-500 text-neutral-300`}>Ad</span>
               </Link>
             </div>
             <div>
