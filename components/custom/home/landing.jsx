@@ -7,7 +7,7 @@ export default function Landing() {
       <div className="p-2 lg:p-8 m-2 grid place-items-center bg-clip-content">
         <div className="mt-8 w-full p-4 font-bold text-center">
             <h3 className='text-lg lg:text-2xl text-neutral-500 duration-500'>
-              Stop copy pasting your wallet address everytime.
+              Stop copy pasting your wallet addresses everytime.
             </h3>
           <div className="text-5xl lg:text-6xl duration-500 text-neutral-100">
             Share all your wallets easily.

@@ -75,7 +75,7 @@ export default function Profile({ path, session }) {
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <a
-              href="https://support.ducklabs.xyz"
+              href="https://discord.gg/zeg6yERdaS"
               className="flex items-center"
             >
               <MessagesSquare className="mr-2 h-4 w-4" />
