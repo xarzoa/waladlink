@@ -8,7 +8,7 @@ export default function Previews() {
           <div className="size-40 md:size-64 duration-500 -left-3 md:-left-20 absolute z-20">
             <div className="animate-preview delay-500">
               <Image
-                src="/wallets.png"
+                src="/assets/wallets.png"
                 alt="preview"
                 height={300}
                 width={200}
@@ -19,7 +19,7 @@ export default function Previews() {
           </div>
           <div className="animate-preview hover:z-30">
             <Image
-              src="/preview.png"
+              src="/assets/preview.png"
               alt="wallets"
               width={300}
               height={400}

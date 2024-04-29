@@ -17,8 +17,7 @@ export const metadata = {
 
 export default function HomePage() {
   const user = {
-    avatar:
-      'https://images.ducklabs.xyz/optimize/waladlinkweb/assets/5665d5ff-93f5-49ed-9a80-ea11b3a30e18.png?bucket=ducklabs&width=200&height=200%3Dquality%3D10',
+    avatar: '/assets/blobs.png',
     name: 'Cloudy Blobs',
     verified: true,
     location: 'Moon',
