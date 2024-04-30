@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 
 export default function Landing() {
   return (
-    <div className="pb-5 mb-6 font-gabarito md:border-t">
+    <div className="pb-5 mb-6 font-gabarito md:border-t grid-bg">
       <div className="p-2 lg:p-8 m-2 grid place-items-center bg-clip-content">
         <div className="mt-8 w-full p-4 font-bold text-center">
             <h3 className='text-lg lg:text-2xl text-neutral-500 duration-500'>
