@@ -1,8 +1,10 @@
 'use server';
 import { z } from 'zod';
-import { update } from '@/lib/authDb';
+import { update, deleteUser } from '@/lib/authDb';
+import { deleteOne, get } from '@/lib/db';
 import { ObjectId } from 'mongodb';
-import { auth } from '@/lib/auth';
+import { auth, signOut } from '@/lib/auth';
+import { Redis } from '@upstash/redis';
 
 const infoSchema = z.object({
   name: z
@@ -81,6 +83,38 @@ export async function updateAvatar(data) {
       return {
         message: 'Something went wrong.',
         type: 'error',
+      };
+    }
+  }
+  return {
+    message: 'Unauthorized. Relogin and try again.',
+    type: 'error',
+  };
+}
+
+export async function deleteAccount(){
+  const session = await auth();
+  if (session) {
+    const userId = session.user.id;
+    try {
+      const redis = new Redis({
+        url: process.env.REDIS_URL,
+        token: process.env.REDIS_TOKEN,
+      });
+      const res = await get('userData', { _id: new ObjectId(userId) });
+      await redis.hset(`user:${res.username}`, { exists: false, userId:'' })
+      await deleteUser('users', { _id: new ObjectId(userId) });
+      await deleteOne('userData', { _id: new ObjectId(userId) });
+      await signOut({ redirect: true })
+      return {
+        message: 'Account deleted.',
+        type: 'success',
+      };
+    } catch (e) {
+      console.log(e);
+      return {
+        message: 'Account deleted.',
+        type: 'success',
       };
     }
   }

@@ -11,7 +11,7 @@ export default async function Settings() {
   const session = await auth();
   return (
     <main>
-      <SettingsComp data={session.user} />
+      <SettingsComp data={session?.user} />
     </main>
   );
 }

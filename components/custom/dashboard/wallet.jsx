@@ -225,11 +225,7 @@ function Skel() {
     { address: '0xCA3C7c5A9E8cD4248Db64A2bF7Ff56c599E47aDf', name: 'MoonCat' },
     { address: '0x1D3B2c843aDf3A94c00cD2C5b3c7b7cAaE8D88bE', name: 'LazyCoin' },
     { address: '0xABc09876DEfGh1jKLmNopqR1234567890', name: 'SockPuppetCoin' },
-    { address: '0xDef1234567890AbCdEfGhIjKlMnOpQrStUvWxYz', name: 'KarenCoin' },
-    { address: '0xFfedcba0987654321AbCdEf0123456789', name: 'FOMOCoin' },
-    { address: '0x1a2B3C4D5E6F7890AbCdEf1234567890', name: 'ScamCoin' },
-    { address: '0x9876543210AbCdEfGhIjKlMnOpQrStUvWxYz', name: 'GlitchCoin' },
-    { address: '0xBA9876543210Fedcba0987654321', name: 'CaffeineCoin' },
+    { address: '0xDef1234567890AbCdEfGhIjKlMnOpQrStUvWxYz', name: 'KarenCoin' }
   ];
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2 mb-12">
