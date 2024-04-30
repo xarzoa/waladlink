@@ -64,7 +64,8 @@ export default function Authentication() {
 
   return (
     <div>
-      <div>
+      <div className="relative">
+        <div className="absolute left-5 h-14 w-14 bg-white blur-3xl -z-20 animate-preview delay-700"></div>
         <Card>
           <CardHeader>
             <CardTitle>DuckPass.</CardTitle>
@@ -131,6 +132,7 @@ export default function Authentication() {
             </p>
           </CardFooter>
         </Card>
+        <div className="absolute h-20 w-14 bg-white blur-3xl -z-20 right-0 bottom-20 animate-preview"></div>
       </div>
     </div>
   );
