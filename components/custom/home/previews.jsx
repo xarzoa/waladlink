@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Previews() {
   return (
-    <div>
+    <div className='md:border-t'>
       <div className="grid grid-cols-1 lg:grid-cols-2 md:place-items-start">
         <div className="place-self-center lg:place-self-end relative duration-500 size-72 md:size-96 lg:size-auto my-16">
           <div className="size-40 md:size-64 duration-500 -left-3 md:-left-20 absolute z-20">

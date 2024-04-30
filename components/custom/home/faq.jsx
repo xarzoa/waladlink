@@ -37,7 +37,7 @@ export default function FAQ() {
     },
   ];
   return (
-    <div className="bg-gradient-to-b from-neutral-900 to-black rounded-none font-gabarito">
+    <div className="bg-gradient-to-b from-neutral-900 to-black rounded-none font-gabarito md:border-t">
       <div>
         <Accordion
           type="single"

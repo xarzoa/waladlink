@@ -58,46 +58,48 @@ export default function HomePage() {
     "We're fast! Like a greased mongoose on roller skates. (Okay, maybe not *that* fast, but still faster than dial-up.)",
   ];
   return (
-    <main className="mt-20 relative">
+    <main className="mt-[4rem] relative">
       <div className="absolute -left-96 -top-96 h-[50vw] w-14 bg-white/50 blur-[80px] rotate-45 -z-20"></div>
       <div className="absolute left-5 h-[50vw] w-14 bg-white/50 blur-[80px] rotate-45 -z-20"></div>
       <div className="fixed right-5 h-[50vw] w-14 bg-white/50 blur-[100px] rotate-45 -z-20 hover:blur-[200px]"></div>
       <div className="absolute bottom-10 h-[50vw] w-14 bg-white/50 blur-[80px] rotate-45 -z-20"></div>
-      <div>
-        <div>
-          <Header display={true} />
-          <Landing />
-          <Previews />
-        </div>
-        <div className="grid place-items-center lg:m-12 m-6">
-          <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 font-semibold font-dmsans divide-solid md:divide-none divide-y list-disc md:text-lg text-neutral-400">
-            {bragging.map((brag, index) => (
-              <li key={index} className="pt-3 max-w-lg m-4">
-                {brag}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="grid mx-6 py-16">
-          <div className="grid place-items-center relative">
-            <div className="animate-preview delay-700">
-              <div className="blur-sm hover:blur-none hover:scale-105 duration-500">
-                <WhiteTheme user={user} />
+      <Header display={true} />
+      <div className="grid md:grid-cols-8 md:place-items-center w-full">
+        <div className="md:col-start-2 md:col-span-6 border-x">
+          <div>
+            <Landing />
+            <Previews />
+          </div>
+          <div className="grid place-items-center md:m-0 p-6 md:border-y">
+            <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 font-semibold font-dmsans divide-solid md:divide-none divide-y list-disc md:text-lg text-neutral-300 md:text-neutral-400">
+              {bragging.map((brag, index) => (
+                <li key={index} className="pt-3 max-w-lg m-4">
+                  {brag}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="grid px-6 md:m-0 py-16 md:border-b">
+            <div className="grid place-items-center relative">
+              <div className="animate-preview delay-700">
+                <div className="blur-sm hover:blur-none hover:scale-105 duration-500">
+                  <WhiteTheme user={user} />
+                </div>
               </div>
-            </div>
-            <div className="animate-preview absolute">
-              <div className="hover:scale-105 duration-500">
-                <BlackTheme user={user} />
+              <div className="animate-preview absolute">
+                <div className="hover:scale-105 duration-500">
+                  <BlackTheme user={user} />
+                </div>
               </div>
             </div>
           </div>
+          <div className='md:border-b md:mb-8'>
+            <Pricing />
+          </div>
+          <Info />
+          <FAQ />
+          <Footer />
         </div>
-        <div>
-          <Pricing />
-        </div>
-        <Info />
-        <FAQ />
-        <Footer />
       </div>
     </main>
   );

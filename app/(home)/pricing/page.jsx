@@ -3,7 +3,7 @@ import PricingComp from '@/components/custom/home/pricing';
 export const metadata = {
   title: 'WalAd - Pricing',
   description: 'Our afforable pricing.',
-  url: 'https://www.walad.link',
+  url: 'https://www.walad.link/pricing',
 };
 
 export default function Pricing() {

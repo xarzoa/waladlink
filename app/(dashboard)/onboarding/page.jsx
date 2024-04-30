@@ -5,7 +5,7 @@ import Username from '@/components/custom/onboarding/username';
 export const metadata = {
   title: 'WalAd - Onboarding',
   description: 'Choose your username.',
-  url: 'https://www.walad.link',
+  url: 'https://www.walad.link/onboarding',
 };
 
 export default async function OnBoarding() {

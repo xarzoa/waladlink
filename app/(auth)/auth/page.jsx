@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 export const metadata = {
   title: 'WalAd - Authentication.',
   description: 'Sign in or sign up to WalAd with DuckPass.',
-  url: 'https://www.ducklabs.xyz',
+  url: 'https://www.ducklabs.xyz/auth',
 };
 
 export const dynamic = 'force-dynamic';

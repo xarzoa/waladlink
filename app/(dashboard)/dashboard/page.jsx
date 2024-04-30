@@ -4,7 +4,7 @@ import { auth } from '@/lib/auth';
 export const metadata = {
   title: 'WalAd - Dashboard',
   description: 'WalAd Dashboard',
-  url: 'https://www.walad.link',
+  url: 'https://www.walad.link/dashboard',
 };
 
 export default async function Dashboard() {

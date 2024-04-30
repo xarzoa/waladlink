@@ -23,6 +23,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { signInAction } from '@/app/(auth)/auth/action';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
 
 const FormSchema = z.object({
   email: z.string().email(),
@@ -109,23 +110,23 @@ export default function Authentication() {
           <CardFooter>
             <p className="text-xs">
               By signing up, you agree to our{' '}
-              <a
+              <Link
                 className="underline"
-                href="https://ducklabs.notion.site/Privacy-Policy-a8e564f73c574d09bb5f62a991dfd659"
+                href="/legal/terms"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Terms
-              </a>{' '}
+              </Link>{' '}
               &{' '}
-              <a
+              <Link
                 className="underline"
-                href="https://ducklabs.notion.site/Terms-of-Service-af4b00d8fb184f1fbb9019e169790863?pvs=4"
+                href="/legal/privacy"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Privacy
-              </a>
+              </Link>
               .
             </p>
           </CardFooter>
