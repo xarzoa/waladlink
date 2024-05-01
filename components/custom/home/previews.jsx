@@ -39,8 +39,7 @@ export default function Previews() {
             <p>
               <span className="underline">WalAd</span> simplifies things! Create
               a single, secure link that holds all your crypto wallet addresses.
-              Anyone can then send you crypto directly, without needing multiple
-              addresses.
+              Anyone can visit that link, Copy the wallet address they want, send you crypto. It is that simple.
             </p>
             <h3 className="text-lg md:text-xl font-bold text-neutral-300">
               Here&apos;s the best part:
