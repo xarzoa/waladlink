@@ -7,6 +7,7 @@ import Info from '@/components/custom/home/info';
 import Footer from '@/components/custom/footer';
 import FAQ from '@/components/custom/home/faq';
 import Previews from '@/components/custom/home/previews';
+import { auth } from '@/lib/auth';
 
 export const metadata = {
   title: 'WalAd: Ditch the Messy Crypto Addresses, Share Simply.',
@@ -15,7 +16,8 @@ export const metadata = {
   url: 'https://www.walad.link',
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const session = await auth();
   const user = {
     avatar: '/assets/blobs.png',
     name: 'Cloudy Blobs',
@@ -63,7 +65,7 @@ export default function HomePage() {
       <div className="absolute left-5 h-[50vw] w-14 bg-white/50 blur-[80px] rotate-45 -z-20"></div>
       <div className="fixed right-5 h-[50vw] w-14 bg-white/50 blur-[100px] rotate-45 -z-20 hover:blur-[200px]"></div>
       <div className="absolute bottom-10 h-[50vw] w-14 bg-white/50 blur-[80px] rotate-45 -z-20"></div>
-      <Header display={true} />
+      <Header display={true} session={session}/>
       <div className="grid md:grid-cols-8 md:place-items-center w-full">
         <div className="md:col-start-2 md:col-span-6 border-x">
           <div>
