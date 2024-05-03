@@ -15,24 +15,24 @@ export default function GraphiteTheme({ user }) {
   const [tab, setTab] = useState('info');
   return (
     <main>
-      <div className="bg-black">
+      <div className="bg-neutral-950">
         <div className="grid grid-cols-1 place-items-center min-h-screen">
-          <div className="p-4 rounded-3xl min-h-[30rem] max-h-[30rem] w-[20rem] grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-black text-white border border-neutral-900 shadow-white/5">
+          <div className="p-4 sm:rounded-3xl sm:h-[30rem] sm:w-[20rem] h-full w-full grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-black text-neutral-300 border border-neutral-800 duration-500">
             <Tabs user={user} tab={tab} />
-            <div className="flex gap-2 absolute bottom-0 w-full rounded-3xl justify-evenly duration-500 font-dmsans">
+            <div className="flex absolute bottom-0 w-full rounded-3xl justify-evenly duration-500 font-dmsans">
               <button
                 onClick={() => setTab('info')}
                 className={`${
-                  tab === 'info' ? 'bg-white/5 border-neutral-900' : ''
-                } w-full h-full p-2 rounded-3xl duration-500 border border-transparent`}
+                  tab === 'info' ? 'bg-white/5 border-neutral-800' : ''
+                } w-full h-full p-2 sm:rounded-bl-3xl duration-500 border border-transparent`}
               >
                 Info
               </button>
               <button
                 onClick={() => setTab('wallets')}
                 className={`${
-                  tab === 'wallets' ? 'bg-white/5 border-neutral-900' : ''
-                } w-full h-full p-2 rounded-3xl duration-500 border border-transparent`}
+                  tab === 'wallets' ? 'bg-white/5 border-neutral-800' : ''
+                } w-full h-full p-2 sm:rounded-br-3xl duration-500 border border-transparent`}
               >
                 Wallets
               </button>
@@ -105,7 +105,7 @@ function Info({ user }) {
 
 function Wallets({ wallets }) {
   return (
-    <div className="w-full space-y-3 overflow-auto max-h-[26rem] hide-scroll pt-2">
+    <div className="w-full space-y-3 overflow-auto sm:max-h-[26rem] max-h-[87vh] hide-scroll pt-2">
       {wallets.map((wallet, index) => (
         <div key={index}>
           <CopyWallet wallet={wallet} />
@@ -121,7 +121,7 @@ function CopyWallet({ wallet }) {
   return (
     <div>
       <div className="flex align-middle items-center border border-neutral-900 rounded-3xl relative">
-        <div className="absolute -top-2 bg-white/5 backdrop-blur-xl text-xs px-2 pb-[1px] rounded-[10px] font-semibold font-dmsans">
+        <div className="absolute -top-2 bg-white/5 backdrop-blur-xl text-xs px-2 pb-[1px] rounded-[10px] font-semibold font-dmsans text-neutral-100">
           {wallet.name}
         </div>
         <div className="bg-white/5 p-2 pl-3 rounded-l-3xl w-full hover:bg-white/10 duration-500 select-none truncate font-jbmono">

@@ -17,22 +17,22 @@ export default function CandyTheme({ user }) {
     <main>
       <div className="bg-[#CDB4DB]">
         <div className="grid grid-cols-1 place-items-center min-h-screen">
-          <div className="p-4 rounded-3xl min-h-[30rem] w-[20rem] grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-[#FFC8DD] text-[#223127] border border-[#FFAFCC]">
+          <div className="p-4 sm:rounded-3xl sm:h-[30rem] sm:w-[20rem] h-full w-full grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-[#FFC8DD] text-[#223127] border border-[#FFAFCC] duration-500">
             <Tabs user={user} tab={tab} />
-            <div className="flex gap-2 absolute bottom-0 w-full rounded-3xl justify-evenly duration-500 font-dmsans">
+            <div className="flex  absolute bottom-0 w-full rounded-3xl justify-evenly duration-500 font-dmsans">
               <button
                 onClick={() => setTab('info')}
                 className={`${
-                  tab === 'info' ? 'bg-[#FFAFCC]/70 border-[#FFAFCC]' : ''
-                } w-full h-full p-2 rounded-3xl duration-500 border border-transparent`}
+                  tab === 'info' ? 'bg-[#FFAFCC]/50 border-[#FFAFCC]' : ''
+                } w-full h-full p-2 sm:rounded-bl-3xl duration-500 border border-transparent`}
               >
                 Info
               </button>
               <button
                 onClick={() => setTab('wallets')}
                 className={`${
-                  tab === 'wallets' ? 'bg-[#FFAFCC]/70 border-[#FFAFCC]' : ''
-                } w-full h-full p-2 rounded-3xl duration-500 border border-transparent`}
+                  tab === 'wallets' ? 'bg-[#FFAFCC]/50 border-[#FFAFCC]' : ''
+                } w-full h-full p-2 sm:rounded-br-3xl duration-500 border border-transparent`}
               >
                 Wallets
               </button>
@@ -48,7 +48,7 @@ function Info({ user }) {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 place-items-center">
-        <Avatar className="h-32 w-32 rounded-3xl">
+        <Avatar className="h-32 w-32 rounded-3xl shadow-sm">
           <AvatarImage
             src={user.avatar ? `${user.avatar}&width=128&height=128` : ''}
             alt={`${user.name}'s profile picture.`}
@@ -105,7 +105,7 @@ function Info({ user }) {
 
 function Wallets({ wallets }) {
   return (
-    <div className="w-full space-y-3 overflow-auto max-h-[26rem] hide-scroll pt-2">
+    <div className="w-full space-y-3 overflow-auto sm:max-h-[26rem] max-h-[87vh] hide-scroll pt-2">
       {wallets.map((wallet, index) => (
         <div key={index}>
           <CopyWallet wallet={wallet} />
