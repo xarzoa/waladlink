@@ -118,7 +118,7 @@ export default function Pricing() {
                   Perfect for hardcore crypto enthusiasts.
                 </div>
                 <div className="font-mono text-xl text-neutral-700 mt-4">
-                  12.99$/year
+                  24.99$/year
                 </div>
               </div>
               <Separator />

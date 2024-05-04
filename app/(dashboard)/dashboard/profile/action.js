@@ -55,31 +55,31 @@ export async function updateInfo(data) {
     };
   }
   const session = await auth();
-  if (session) {
-    const userId = session.user.id;
-    try {
-      const info = {
-        name: data.name,
-        location: data.location || '',
-        bio: data.bio || '',
-      };
-      await update('userData', '$set', info, { _id: new ObjectId(userId) });
-      return {
-        message: 'Your info updated.',
-        type: 'success',
-      };
-    } catch (e) {
-      console.log(e);
-      return {
-        message: 'Something went wrong.',
-        type: 'error',
-      };
-    }
+  if (!session) {
+    return {
+      message: 'Unauthorized. Relogin and try again.',
+      type: 'error',
+    };
   }
-  return {
-    message: 'Unauthorized. Relogin and try again.',
-    type: 'error',
-  };
+  const userId = session.user.id;
+  try {
+    const info = {
+      name: data.name,
+      location: data.location || '',
+      bio: data.bio || '',
+    };
+    await update('userData', '$set', info, { _id: new ObjectId(userId) });
+    return {
+      message: 'Your info updated.',
+      type: 'success',
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      message: 'Something went wrong.',
+      type: 'error',
+    };
+  }
 }
 
 export async function updateTheme(data) {
@@ -94,29 +94,29 @@ export async function updateTheme(data) {
     };
   }
   const session = await auth();
-  if (session) {
-    const userId = session.user.id;
-    try {
-      const theme = {
-        theme: data.theme,
-      };
-      await update('userData', '$set', theme, { _id: new ObjectId(userId) });
-      return {
-        message: 'Theme updated.',
-        type: 'success',
-      };
-    } catch (e) {
-      console.log(e);
-      return {
-        message: 'Something went wrong.',
-        type: 'error',
-      };
-    }
+  if (!session) {
+    return {
+      message: 'Unauthorized. Relogin and try again.',
+      type: 'error',
+    };
   }
-  return {
-    message: 'Unauthorized. Relogin and try again.',
-    type: 'error',
-  };
+  const userId = session.user.id;
+  try {
+    const theme = {
+      theme: data.theme,
+    };
+    await update('userData', '$set', theme, { _id: new ObjectId(userId) });
+    return {
+      message: 'Theme updated.',
+      type: 'success',
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      message: 'Something went wrong.',
+      type: 'error',
+    };
+  }
 }
 
 export async function updateAvatar(data) {
@@ -132,29 +132,29 @@ export async function updateAvatar(data) {
     };
   }
   const session = await auth();
-  if (session) {
-    const userId = session.user.id;
-    try {
-      const avatar = {
-        avatar: avatarURL,
-      };
-      await update('userData', '$set', avatar, { _id: new ObjectId(userId) });
-      return {
-        message: 'Avatar updated.',
-        type: 'success',
-      };
-    } catch (e) {
-      console.log(e);
-      return {
-        message: 'Something went wrong.',
-        type: 'error',
-      };
-    }
+  if (!session) {
+    return {
+      message: 'Unauthorized. Relogin and try again.',
+      type: 'error',
+    };
   }
-  return {
-    message: 'Unauthorized. Relogin and try again.',
-    type: 'error',
-  };
+  const userId = session.user.id;
+  try {
+    const avatar = {
+      avatar: avatarURL,
+    };
+    await update('userData', '$set', avatar, { _id: new ObjectId(userId) });
+    return {
+      message: 'Avatar updated.',
+      type: 'success',
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      message: 'Something went wrong.',
+      type: 'error',
+    };
+  }
 }
 
 export async function updateUsername(data, oldUsername) {
@@ -169,39 +169,88 @@ export async function updateUsername(data, oldUsername) {
     };
   }
   const session = await auth();
-  if (session) {
-    const userId = session.user.id;
-    try {
-      const redis = new Redis({
-        url: process.env.REDIS_URL,
-        token: process.env.REDIS_TOKEN,
-      });
-      const username = {
-        username: data.username,
-      };
-      const usernames = {
-        history: data.username,
-      };
-      await update('userData', '$set', username, { _id: new ObjectId(userId) });
-      await update('userData', '$push', usernames, {
-        _id: new ObjectId(userId),
-      });
-      await redis.hdel(`user:${oldUsername}`, { exists: true, userId });
-      await redis.hset(`user:${data.username}`, { exists: true, userId });
-      return {
-        message: 'Username updated.',
-        type: 'success',
-      };
-    } catch (e) {
-      console.log(e);
-      return {
-        message: 'Something went wrong.',
-        type: 'error',
-      };
-    }
+  if (!session) {
+    return {
+      message: 'Unauthorized. Relogin and try again.',
+      type: 'error',
+    };
   }
-  return {
-    message: 'Unauthorized. Relogin and try again.',
-    type: 'error',
-  };
+  const userId = session.user.id;
+  try {
+    const redis = new Redis({
+      url: process.env.REDIS_URL,
+      token: process.env.REDIS_TOKEN,
+    });
+    const username = {
+      username: data.username,
+    };
+    const usernames = {
+      history: data.username,
+    };
+    await update('userData', '$set', username, { _id: new ObjectId(userId) });
+    await update('userData', '$push', usernames, {
+      _id: new ObjectId(userId),
+    });
+    await redis.hdel(`user:${oldUsername}`, { exists: true, userId });
+    await redis.hset(`user:${data.username}`, { exists: true, userId });
+    return {
+      message: 'Username updated.',
+      type: 'success',
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      message: 'Something went wrong.',
+      type: 'error',
+    };
+  }
+}
+
+export async function addSocials() {
+  const validatedFields = usernameSchema.safeParse({
+    username: data.username,
+  });
+  if (!validatedFields.success) {
+    const error = validatedFields.error.flatten().fieldErrors;
+    return {
+      message: error.username,
+      type: 'error',
+    };
+  }
+  const session = await auth();
+  if (!session) {
+    return {
+      message: 'Unauthorized. Relogin and try again.',
+      type: 'error',
+    };
+  }
+  const userId = session.user.id;
+  try {
+    const redis = new Redis({
+      url: process.env.REDIS_URL,
+      token: process.env.REDIS_TOKEN,
+    });
+    const username = {
+      username: data.username,
+    };
+    const usernames = {
+      history: data.username,
+    };
+    await update('userData', '$set', username, { _id: new ObjectId(userId) });
+    await update('userData', '$push', usernames, {
+      _id: new ObjectId(userId),
+    });
+    await redis.hdel(`user:${oldUsername}`, { exists: true, userId });
+    await redis.hset(`user:${data.username}`, { exists: true, userId });
+    return {
+      message: 'Username updated.',
+      type: 'success',
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      message: 'Something went wrong.',
+      type: 'error',
+    };
+  }
 }

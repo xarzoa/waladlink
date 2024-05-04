@@ -43,7 +43,6 @@ const FormSchema = z.object({
   address: z
     .string()
     .trim()
-    .regex(/^[^\s\W]+$/, 'Special characters not allowed.')
     .min(20, { message: 'Address must contain 20+ characters.' })
     .max(48, { message: 'Address cannot exceed 48 characters.' }),
 });

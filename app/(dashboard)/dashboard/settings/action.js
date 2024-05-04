@@ -29,29 +29,29 @@ export async function updateInfo(data) {
     };
   }
   const session = await auth();
-  if (session) {
-    const userId = session.user.id;
-    try {
-      const info = {
-        name: data.name,
-      };
-      await update('users', '$set', info, { _id: new ObjectId(userId) });
-      return {
-        message: 'Your name updated.',
-        type: 'success',
-      };
-    } catch (e) {
-      console.log(e);
-      return {
-        message: 'Something went wrong.',
-        type: 'error',
-      };
-    }
+  if (!session) {
+    return {
+      message: 'Unauthorized. Relogin and try again.',
+      type: 'error',
+    };
   }
-  return {
-    message: 'Unauthorized. Relogin and try again.',
-    type: 'error',
-  };
+  const userId = session.user.id;
+  try {
+    const info = {
+      name: data.name,
+    };
+    await update('users', '$set', info, { _id: new ObjectId(userId) });
+    return {
+      message: 'Your name updated.',
+      type: 'success',
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      message: 'Something went wrong.',
+      type: 'error',
+    };
+  }
 }
 
 export async function updateAvatar(data) {
@@ -67,59 +67,59 @@ export async function updateAvatar(data) {
     };
   }
   const session = await auth();
-  if (session) {
-    const userId = session.user.id;
-    try {
-      const image = {
-        image: avatarURL,
-      };
-      await update('users', '$set', image, { _id: new ObjectId(userId) });
-      return {
-        message: 'Avatar updated.',
-        type: 'success',
-      };
-    } catch (e) {
-      console.log(e);
-      return {
-        message: 'Something went wrong.',
-        type: 'error',
-      };
-    }
+  if (!session) {
+    return {
+      message: 'Unauthorized. Relogin and try again.',
+      type: 'error',
+    };
   }
-  return {
-    message: 'Unauthorized. Relogin and try again.',
-    type: 'error',
-  };
+  const userId = session.user.id;
+  try {
+    const image = {
+      image: avatarURL,
+    };
+    await update('users', '$set', image, { _id: new ObjectId(userId) });
+    return {
+      message: 'Avatar updated.',
+      type: 'success',
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      message: 'Something went wrong.',
+      type: 'error',
+    };
+  }
 }
 
-export async function deleteAccount(){
+export async function deleteAccount() {
   const session = await auth();
-  if (session) {
-    const userId = session.user.id;
-    try {
-      const redis = new Redis({
-        url: process.env.REDIS_URL,
-        token: process.env.REDIS_TOKEN,
-      });
-      const res = await get('userData', { _id: new ObjectId(userId) });
-      await redis.hset(`user:${res.username}`, { exists: false, userId:'' })
-      await deleteUser('users', { _id: new ObjectId(userId) });
-      await deleteOne('userData', { _id: new ObjectId(userId) });
-      await signOut({ redirect: true })
-      return {
-        message: 'Account deleted.',
-        type: 'success',
-      };
-    } catch (e) {
-      console.log(e);
-      return {
-        message: 'Account deleted.',
-        type: 'success',
-      };
-    }
+  if (!session) {
+    return {
+      message: 'Unauthorized. Relogin and try again.',
+      type: 'error',
+    };
   }
-  return {
-    message: 'Unauthorized. Relogin and try again.',
-    type: 'error',
-  };
+  const userId = session.user.id;
+  try {
+    const redis = new Redis({
+      url: process.env.REDIS_URL,
+      token: process.env.REDIS_TOKEN,
+    });
+    const res = await get('userData', { _id: new ObjectId(userId) });
+    await redis.hset(`user:${res.username}`, { exists: false, userId: '' });
+    await deleteUser('users', { _id: new ObjectId(userId) });
+    await deleteOne('userData', { _id: new ObjectId(userId) });
+    await signOut({ redirect: true });
+    return {
+      message: 'Account deleted.',
+      type: 'success',
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      message: 'Account deleted.',
+      type: 'success',
+    };
+  }
 }

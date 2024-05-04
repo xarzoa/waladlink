@@ -10,27 +10,13 @@ import {
   HoverCardTrigger,
 } from '@/components/ui/hover-card';
 import Link from 'next/link';
-import WalAdIcon from '../icons/walad';
 
 export default function CandyTheme({ user }) {
   const [tab, setTab] = useState('info');
   return (
     <main>
       <div className="bg-[#CDB4DB]">
-        <div className="grid grid-cols-1 place-items-center min-h-screen relative">
-          <Button
-            className="absolute z-50 top-2 right-2 shadow-xl size-7 sm:size-10 duration-500 rounded-3xl"
-            size="icon"
-            asChild
-          >
-            <a
-              href="https://walad.link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <WalAdIcon />
-            </a>
-          </Button>
+        <div className="grid grid-cols-1 place-items-center min-h-screen">
           <div className="p-4 sm:rounded-3xl sm:h-[30rem] sm:w-[20rem] h-full w-full grid grid-cols-1 shadow-2xl backdrop-blur-2xl bg-[#FFC8DD] text-[#223127] border border-[#FFAFCC] duration-500">
             <Tabs user={user} tab={tab} />
             <div className="flex  absolute bottom-0 w-full rounded-3xl justify-evenly duration-500 font-dmsans">
