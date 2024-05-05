@@ -5,17 +5,10 @@ import GraphiteTheme from '@/components/custom/themes/graphite';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-
-async function fetchData(user) {
-  const res = await fetch(`${process.env.BASE_URL}/${user}/get`, {
-    cache: 'no-cache',
-  });
-  const data = await res.json();
-  return data.data;
-}
+import { getUser } from '@/lib/userPage';
 
 export async function generateMetadata({ params }) {
-  const user = await fetchData(params.user);
+  const user = await getUser(params.user);
   if (!user) {
     return {
       title: `404 - User not found.`,
@@ -39,7 +32,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function UserPage({ params }) {
-  const user = await fetchData(params.user);
+  const user = await getUser(params.user);
   if (!user) {
     return (
       <div>
