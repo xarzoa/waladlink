@@ -4,6 +4,7 @@ import { update } from '@/lib/db';
 import { Redis } from '@upstash/redis';
 import { ObjectId } from 'mongodb';
 import { auth } from '@/lib/auth';
+import { revalidatePath } from 'next/cache';
 
 const infoSchema = z.object({
   name: z

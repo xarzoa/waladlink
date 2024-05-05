@@ -5,6 +5,7 @@ import { deleteOne, get } from '@/lib/db';
 import { ObjectId } from 'mongodb';
 import { auth, signOut } from '@/lib/auth';
 import { Redis } from '@upstash/redis';
+import { revalidatePath } from 'next/cache';
 
 const infoSchema = z.object({
   name: z
