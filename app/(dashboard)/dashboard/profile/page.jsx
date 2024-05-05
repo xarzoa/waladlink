@@ -1,4 +1,6 @@
-import { ProfileComp } from '@/components/custom/dashboard/profile';
+import ProfileComp from '@/components/custom/dashboard/profile';
+import { getUser } from '@/lib/getUser';
+import { auth } from '@/lib/auth';
 
 export const metadata = {
   title: 'WalAd - Dashboard/Profile',
@@ -6,10 +8,12 @@ export const metadata = {
   url: 'https://www.walad.link/dashboard/profile',
 };
 
-export default function Profile() {
+export default async function Profile() {
+  const session = await auth();
+  const user = await getUser(session.user.id, 'private')
   return (
     <main>
-      <ProfileComp />
+      <ProfileComp user={user}/>
     </main>
   );
 }

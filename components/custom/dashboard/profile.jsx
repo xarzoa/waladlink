@@ -24,7 +24,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Textarea } from '@/components/ui/textarea';
-import { useUser } from '@/lib/getUser';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   updateInfo,
@@ -222,36 +221,6 @@ function BasicInfo({ info }) {
   );
 }
 
-function BasicInfoSkeleton() {
-  return (
-    <div>
-      <div>
-        <Card>
-          <CardHeader>
-            <CardTitle>Profile</CardTitle>
-            <CardDescription>Your name and info.</CardDescription>
-          </CardHeader>
-          <CardContent className="grid w-full lg:grid-cols-2 md:grid-cols-2 items-center gap-2">
-            <div>
-              <Skeleton className="h-4 w-24" />
-              <Skeleton className="h-32 w-32 mt-3" />
-            </div>
-            <Skeleton className="h-8 w-40" />
-          </CardContent>
-          <CardContent>
-            <Skeleton className="h-4 w-20" />
-            <Skeleton className="h-6 w-28 mt-3" />
-            <div className="m-4"></div>
-            <Skeleton className="h-4 w-20" />
-            <Skeleton className="h-8 w-28 mt-3" />
-            <Skeleton className="h-8 w-16 my-3" />
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  );
-}
-
 function ThemeBuilder({ theme }) {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -345,25 +314,6 @@ function ThemeBuilder({ theme }) {
               </div>
             </form>
           </Form>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
-
-function ThemeBuilderSkeleton() {
-  return (
-    <div>
-      <Card>
-        <CardHeader>
-          <CardTitle>Theme</CardTitle>
-          <CardDescription>Choose your theme.</CardDescription>
-        </CardHeader>
-        <CardContent className="grid w-full lg:grid-cols-2 md:grid-cols-2 items-center gap-2">
-          <Skeleton className="h-4 w-20" />
-          <Skeleton className="h-4 w-28 mt-3" />
-          <Skeleton className="h-4 w-20 mt-3" />
-          <Skeleton className="h-4 w-28 mt-3" />
         </CardContent>
       </Card>
     </div>
@@ -498,44 +448,12 @@ function ChangeUsername({ username }) {
   );
 }
 
-function ChangeUsernameSkeleton() {
-  return (
-    <div>
-      <Card>
-        <CardHeader>
-          <CardTitle>Username</CardTitle>
-          <CardDescription>Change your username.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Skeleton className="h-4 w-20" />
-          <Skeleton className="h-8 w-28 mt-3" />
-          <Skeleton className="h-8 w-16 my-3" />
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
-
-export function ProfileComp() {
-  const { user, error, isLoading } = useUser(`/dashboard/get`);
-  if (error) {
-    toast.error(error);
-  }
+export default function ProfileComp({ user }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
-      {isLoading ? (
-        <>
-          <BasicInfoSkeleton />
-          <ThemeBuilderSkeleton />
-          <ChangeUsernameSkeleton />
-        </>
-      ) : (
-        <>
-          <BasicInfo info={user.data} />
-          <ThemeBuilder theme={user.data.theme} />
-          <ChangeUsername username={user.data.username} />
-        </>
-      )}
+      <BasicInfo info={user} />
+      <ThemeBuilder theme={user.theme} />
+      <ChangeUsername username={user.username} />
     </div>
   );
 }

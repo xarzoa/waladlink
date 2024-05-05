@@ -1,4 +1,6 @@
-import WalletComp from '@/components/custom/dashboard/wallet';
+import WalletsComp from '@/components/custom/dashboard/wallets';
+import { getUser } from '@/lib/getUser';
+import { auth } from '@/lib/auth';
 
 export const metadata = {
   title: 'WalAd - Dashboard/Wallets',
@@ -7,9 +9,11 @@ export const metadata = {
 };
 
 export default async function Wallets() {
+  const session = await auth()
+  const user = await getUser(session.user.id, 'private')
   return (
     <main>
-      <WalletComp />
+      <WalletsComp user={user}/>
     </main>
   );
 }

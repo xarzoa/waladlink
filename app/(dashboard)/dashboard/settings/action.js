@@ -51,6 +51,8 @@ export async function updateInfo(data) {
       message: 'Something went wrong.',
       type: 'error',
     };
+  } finally {
+    revalidatePath('/dashboard/settings');
   }
 }
 
@@ -89,6 +91,8 @@ export async function updateAvatar(data) {
       message: 'Something went wrong.',
       type: 'error',
     };
+  } finally {
+    revalidatePath('/dashboard/settings');
   }
 }
 
@@ -121,5 +125,7 @@ export async function deleteAccount() {
       message: 'Account deleted.',
       type: 'success',
     };
+  } finally {
+    revalidatePath('/dashboard/settings');
   }
 }

@@ -13,7 +13,6 @@ import { useState } from 'react';
 import { Trash2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useUser } from '@/lib/getUser';
 import { toast } from 'sonner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -47,14 +46,10 @@ const FormSchema = z.object({
     .max(48, { message: 'Address cannot exceed 48 characters.' }),
 });
 
-export default function WalletComp() {
+export default function WalletsComp({ user }) {
   const [sucess, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const { user, error, isLoading } = useUser(`/dashboard/get`);
-  if (error) {
-    toast.error(error);
-  }
   const [open, setOpen] = useState(false);
   const doOpen = () => {
     if (open) {
@@ -100,13 +95,7 @@ export default function WalletComp() {
           </Button>
         </CardContent>
       </Card>
-      {isLoading ? (
-        <Skel />
-      ) : user.data?.wallets[0] ? (
-        <Wallets wallets={user.data.wallets} />
-      ) : (
-        <AddWallet />
-      )}
+      {user.wallets[0] ? <Wallets wallets={user.wallets} /> : <AddWallet />}
       <div className="fixed bottom-3 right-3 lg:hidden block duration-500">
         <Button onClick={doOpen} size="icon">
           <Plus className="h-5 w-5" strokeWidth={3} />
@@ -210,32 +199,6 @@ function Wallets({ wallets }) {
                 />
               )}
             </Button>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  );
-}
-
-function Skel() {
-  const wallets = [
-    { address: '0x784B2faE5B399dB1343A98dBcA7827eff4B0b411', name: 'DogeBonk' },
-    { address: '0x89765EEdD4D47b87aBCFcb9deFeC28D', name: 'PizzaCoin' },
-    { address: '0xCA3C7c5A9E8cD4248Db64A2bF7Ff56c599E47aDf', name: 'MoonCat' },
-    { address: '0x1D3B2c843aDf3A94c00cD2C5b3c7b7cAaE8D88bE', name: 'LazyCoin' },
-    { address: '0xABc09876DEfGh1jKLmNopqR1234567890', name: 'SockPuppetCoin' },
-    { address: '0xDef1234567890AbCdEfGhIjKlMnOpQrStUvWxYz', name: 'KarenCoin' }
-  ];
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2 mb-12">
-      {wallets.map((wallet, index) => (
-        <Card key={index} className="p-2">
-          <CardContent className="flex items-center justify-between p-2">
-            <div>
-              <Skeleton className="w-32 h-4 mb-2" />
-              <Skeleton className="w-40 h-3" />
-            </div>
-            <Skeleton className="rounded-none h-9 w-9" />
           </CardContent>
         </Card>
       ))}

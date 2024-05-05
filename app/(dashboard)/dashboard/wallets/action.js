@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { get, update } from '@/lib/db';
 import { ObjectId } from 'mongodb';
 import { auth } from '@/lib/auth';
+import { revalidatePath } from 'next/cache';
 
 const walletSchema = z.object({
   name: z
@@ -61,6 +62,9 @@ export async function addWallet(data) {
         message: 'Something went wrong.',
         type: 'error',
       };
+    } finally {
+      revalidatePath('/dashboard/wallets');
+      revalidatePath('/dashboard');
     }
   }
   return {
@@ -108,5 +112,8 @@ export async function removeWallet(data) {
       message: 'Something went wrong.',
       type: 'error',
     };
+  } finally {
+    revalidatePath('/dashboard/wallets');
+    revalidatePath('/dashboard');
   }
 }

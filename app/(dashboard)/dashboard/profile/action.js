@@ -79,6 +79,8 @@ export async function updateInfo(data) {
       message: 'Something went wrong.',
       type: 'error',
     };
+  } finally {
+    revalidatePath('/dashboard/profile');
   }
 }
 
@@ -116,6 +118,8 @@ export async function updateTheme(data) {
       message: 'Something went wrong.',
       type: 'error',
     };
+  } finally {
+    revalidatePath('/dashboard/profile');
   }
 }
 
@@ -154,6 +158,8 @@ export async function updateAvatar(data) {
       message: 'Something went wrong.',
       type: 'error',
     };
+  } finally {
+    revalidatePath('/dashboard/profile');
   }
 }
 
@@ -203,6 +209,8 @@ export async function updateUsername(data, oldUsername) {
       message: 'Something went wrong.',
       type: 'error',
     };
+  } finally {
+    revalidatePath('/dashboard/profile');
   }
 }
 
@@ -252,5 +260,8 @@ export async function addSocials() {
       message: 'Something went wrong.',
       type: 'error',
     };
+  } finally {
+    revalidatePath('/dashboard/profile');
+    revalidatePath('/dashboard');
   }
 }

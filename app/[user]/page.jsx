@@ -5,7 +5,7 @@ import GraphiteTheme from '@/components/custom/themes/graphite';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { getUser } from '@/lib/userPage';
+import { getUser } from '@/lib/getUser';
 
 export async function generateMetadata({ params }) {
   const user = await getUser(params.user);

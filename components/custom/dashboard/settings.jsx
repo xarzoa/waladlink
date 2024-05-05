@@ -31,6 +31,7 @@ import {
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogDescription,
   DialogHeader,
   DialogTitle,
@@ -200,11 +201,9 @@ function DeleteAccount() {
         <CardHeader>
           <CardTitle>Delete your Account</CardTitle>
           <CardDescription>
-            <p>
-              Delete your DuckPass, WalAd account and all data.{' '}
-              <b>This is not reversible</b>. <br />
-              We <b>can not restore</b> your account once you deleted.
-            </p>
+            Delete your DuckPass, WalAd account and all data.{' '}
+            <b>This is not reversible</b>. <br />
+            We <b>can not restore</b> your account once you deleted.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -213,28 +212,29 @@ function DeleteAccount() {
             <SubmitButton childern={'Delete'} onClick={doOpen} />
             <Dialog onOpenChange={setOpen} open={open}>
               <DialogContent>
-                <DialogHeader>
+                <DialogHeader className="text-start">
                   <DialogTitle>Are you sure?</DialogTitle>
                   <DialogDescription>
-                    <p>
-                      This will erase all your data from our servers. And{' '}
-                      <b>This is not reversible</b>.
-                    </p>
-                    <div className="flex justify-between mt-3">
-                      <div></div>
-                      <div className='flex gap-3'>
-                        <SubmitButton childern={'Cancel'} onClick={doOpen} className="font-bold"/>
-                        <SubmitButton
-                          childern={'Continue'}
-                          disabled={disabled}
-                          success={success}
-                          loading={loading}
-                          onClick={deleteMe}
-                        />
-                      </div>
-                    </div>
+                    This will erase all your data from our servers. <br />
+                    <b>This is not reversible</b>.
                   </DialogDescription>
                 </DialogHeader>
+                <DialogFooter>
+                  <div className="flex gap-3 justify-between md:justify-end">
+                    <SubmitButton
+                      childern={'Cancel'}
+                      onClick={doOpen}
+                      className="font-bold"
+                    />
+                    <SubmitButton
+                      childern={'Continue'}
+                      disabled={disabled}
+                      success={success}
+                      loading={loading}
+                      onClick={deleteMe}
+                    />
+                  </div>
+                </DialogFooter>
               </DialogContent>
             </Dialog>
           </div>
