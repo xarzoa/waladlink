@@ -1,4 +1,4 @@
-import WalletsComp from '@/components/custom/dashboard/wallets';
+import WalletsComp from './wallets';
 import { getUser } from '@/lib/getUser';
 import { auth } from '@/lib/auth';
 

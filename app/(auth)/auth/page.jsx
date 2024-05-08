@@ -1,4 +1,4 @@
-import Authentication from '@/components/custom/auth/email';
+import Authentication from './email';
 import { auth } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 

@@ -42,11 +42,14 @@ const avatarSchema = z.object({
   avatar: z.string().url({ message: 'Invalid url.' }),
 });
 
-export async function updateInfo(data) {
+export async function updateInfo(preState,formData) {
+  const name = formData.get('name')
+  const location = formData.get('location')
+  const bio = formData.get('bio')
   const validatedFields = infoSchema.safeParse({
-    name: data.name,
-    location: data.location || '',
-    bio: data.bio || '',
+    name,
+    location: location || '',
+    bio: bio || '',
   });
   if (!validatedFields.success) {
     const error = validatedFields.error.flatten().fieldErrors;
@@ -65,9 +68,9 @@ export async function updateInfo(data) {
   const userId = session.user.id;
   try {
     const info = {
-      name: data.name,
-      location: data.location || '',
-      bio: data.bio || '',
+      name,
+      location: location || '',
+      bio: bio || '',
     };
     await update('userData', '$set', info, { _id: new ObjectId(userId) });
     return {
@@ -81,7 +84,7 @@ export async function updateInfo(data) {
       type: 'error',
     };
   } finally {
-    revalidatePath('/dashboard/profile');
+    revalidatePath('/dashboard/');
   }
 }
 

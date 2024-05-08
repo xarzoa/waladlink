@@ -22,12 +22,12 @@ import { toast } from 'sonner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import SubmitButton from '../submit-button';
+import SubmitButton from '@/components/custom/submit-button';
 import {
   updateAvatar,
   updateInfo,
   deleteAccount,
-} from '@/app/(dashboard)/dashboard/settings/action';
+} from './actions';
 import {
   Dialog,
   DialogContent,
@@ -45,14 +45,16 @@ export default function SettingsComp({ data }) {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const [name, setName] = useState(data.name)
 
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: data.name || '',
+      name
     },
   });
   async function onSubmit(data) {
+    setName(data.name)
     setLoading(true);
     const toastId = toast.loading('Updating your info...');
     const res = await updateInfo(data);

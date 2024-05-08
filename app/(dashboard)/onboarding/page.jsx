@@ -1,6 +1,6 @@
 import { auth } from '@/lib/auth';
 import { redirect, permanentRedirect } from 'next/navigation';
-import Username from '@/components/custom/onboarding/username';
+import Username from './username';
 
 export const metadata = {
   title: 'WalAd - Onboarding',

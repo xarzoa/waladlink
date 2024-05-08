@@ -28,9 +28,9 @@ import {
 import {
   addWallet,
   removeWallet,
-} from '@/app/(dashboard)/dashboard/wallets/action';
+} from './actions';
 import { Loader } from 'lucide-react';
-import SubmitButton from '../submit-button';
+import SubmitButton from '@/components/custom/submit-button';
 
 const FormSchema = z.object({
   name: z

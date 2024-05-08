@@ -1,4 +1,4 @@
-import SettingsComp from '@/components/custom/dashboard/settings';
+import SettingsComp from './settings';
 import { auth } from '@/lib/auth';
 
 export const metadata = {

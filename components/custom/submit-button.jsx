@@ -1,32 +1,18 @@
-import { Loader, CircleCheck } from 'lucide-react';
+import { Loader } from 'lucide-react';
 import { Button } from '../ui/button';
+import { useFormStatus } from 'react-dom';
+import Dots from './loader/dots';
 
-export default function SubmitButton({
-  childern,
-  disabled,
-  loading,
-  success,
-  size,
-  className,
-  ...props
-}) {
+export default function SubmitButton({ childern, size, className, disabled, ...props }) {
+  const { pending } = useFormStatus();
   return (
     <Button
-      size={size || ''}
-      disabled={disabled || loading}
-      className={`duration-700 ${
-        success
-          ? 'bg-neutral-500/30 focus:bg-neutral-500/30 hover:bg-neutral-500/30 bg-neutral-500'
-          : ''
-      } ${className}`} {...props}
+      size={size}
+      disabled={disabled || pending}
+      className={`${className}`}
+      {...props}
     >
-      {loading ? (
-        <Loader className="h-6 w-6 animate-spin" />
-      ) : success ? (
-        <CircleCheck className="h-6 w-6" />
-      ) : (
-        [childern]
-      )}
+      {pending ? <Dots className="animate-spin" /> : [childern]}
     </Button>
   );
 }

@@ -1,4 +1,4 @@
-import Header from '@/components/custom/dashboard/header';
+import Header from '../header';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { auth } from '@/lib/auth';

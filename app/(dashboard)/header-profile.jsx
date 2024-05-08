@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useState } from 'react';
-import { signOutAction } from '@/app/(dashboard)/dashboard/action';
+import { signOutAction } from './dashboard/actions';
 
 function ReuseAvatar({ email, image, name }) {
   return (

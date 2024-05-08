@@ -1,4 +1,4 @@
-import ProfileComp from '@/components/custom/dashboard/profile';
+import ProfileComp from './profile';
 import { getUser } from '@/lib/getUser';
 import { auth } from '@/lib/auth';
 

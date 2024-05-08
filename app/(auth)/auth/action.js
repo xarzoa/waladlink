@@ -1,33 +1,26 @@
 'use server';
 import { z } from 'zod';
 import { signIn } from '@/lib/auth';
+import { revalidatePath } from 'next/cache';
 
-const FormSchema = z.object({
+const EmailSchema = z.object({
   email: z.string().email(),
 });
 
-export async function signInAction(data) {
-  const validatedFields = FormSchema.safeParse({
-    email: data.email,
-  });
+export async function signInAction(prevState, formData) {
+  const email = formData.get('email');
+  const validatedFields = EmailSchema.safeParse({ email });
   if (!validatedFields.success) {
     const error = validatedFields.error.flatten().fieldErrors;
     return {
-      message: error,
+      message: error.email,
       type: 'error',
     };
   }
-  try {
-    await signIn('resend', { email: data.email, redirect: false });
-    return {
-      message: 'We sent you the magic-link.',
-      type: 'success',
-    };
-  } catch (e) {
-    console.log(e);
-    return {
-      message: 'Something went wrong.',
-      type: 'error',
-    };
-  }
+  await signIn('resend', { email, redirect: false });
+  revalidatePath('/auth')
+  return {
+    message: "We sent you the magic-link.",
+    type: 'success',
+  };
 }
