@@ -19,10 +19,13 @@ const walletSchema = z.object({
     .max(48, { message: 'Address cannot exceed 48 characters.' }),
 });
 
-export async function addWallet(data) {
+export async function addWallet(prevState, formData) {
+  const name = formData.get('name')
+  const address = formData.get('address')
+  console.log(name,address)
   const validatedFields = walletSchema.safeParse({
-    name: data.name,
-    address: data.address,
+    name,
+    address,
   });
   if (!validatedFields.success) {
     const error = validatedFields.error.flatten().fieldErrors;
@@ -44,8 +47,8 @@ export async function addWallet(data) {
     try {
       const wallet = {
         wallets: {
-          name: data.name,
-          address: data.address,
+          name,
+          address,
           id: userData.wallets.length + 1,
         },
       };

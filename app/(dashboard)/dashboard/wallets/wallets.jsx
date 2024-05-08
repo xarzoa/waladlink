@@ -9,48 +9,26 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Trash2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from 'sonner';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-  FormLabel,
-} from '@/components/ui/form';
-import {
-  addWallet,
-  removeWallet,
-} from './actions';
+import { addWallet, removeWallet } from './actions';
 import { Loader } from 'lucide-react';
 import SubmitButton from '@/components/custom/submit-button';
-
-const FormSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(3, { message: 'Name must contain 3+ characters.' })
-    .max(16, { message: 'Name cannot exceed 16 characters.' })
-    .regex(/^[a-zA-Z0-9\$]+$/, 'Special characters not allowed.'),
-  address: z
-    .string()
-    .trim()
-    .min(20, { message: 'Address must contain 20+ characters.' })
-    .max(48, { message: 'Address cannot exceed 48 characters.' }),
-});
+import { useFormState } from 'react-dom';
 
 export default function WalletsComp({ user }) {
-  const [sucess, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [walletState, addWalletAction] = useFormState(addWallet, {});
+  useEffect(
+    (x) => {
+      if (walletState.type) {
+        toast[walletState.type](walletState.message);
+      }
+    },
+    [walletState]
+  );
   const doOpen = () => {
     if (open) {
       setOpen(false);
@@ -58,30 +36,6 @@ export default function WalletsComp({ user }) {
       setOpen(true);
     }
   };
-
-  const form = useForm({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      name: '',
-      address: '',
-    },
-  });
-  async function onSubmit(data) {
-    setLoading(true);
-    const toastId = toast.loading('Adding your wallet...');
-    const res = await addWallet(data);
-    toast[res.type](res.message, { id: toastId });
-    if (res.type === 'success') {
-      setSuccess(true);
-      form.reset();
-    }
-    setLoading(false);
-    setDisabled(true);
-    setTimeout(() => {
-      setDisabled(false);
-      setSuccess(false);
-    }, 2000);
-  }
 
   return (
     <div>
@@ -110,53 +64,26 @@ export default function WalletsComp({ user }) {
             </DialogDescription>
           </DialogHeader>
           <div>
-            <Form {...form}>
-              <form
-                className="space-y-4"
-                onSubmit={form.handleSubmit(onSubmit)}
-              >
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="font-bold text-neutral-300">
-                        Wallet name
-                      </FormLabel>
-                      <FormControl>
-                        <Input placeholder="Wallet name" {...field} />
-                      </FormControl>
-                      <FormMessage className="text-red-500/70 text-xs" />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
+            <form action={addWalletAction} className='space-y-3'>
+              <div className='space-y-2'>
+                <label htmlFor="name">Wallet name</label>
+                <Input placeholder="Wallet name" name="name" id="name" />
+              </div>
+              <div className='space-y-2'>
+                <label htmlFor="address">Wallet address</label>
+                <Input
+                  placeholder="Wallet address"
                   name="address"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="font-bold text-neutral-300">
-                        Wallet Address
-                      </FormLabel>
-                      <FormControl>
-                        <Input placeholder="Wallet address" {...field} />
-                      </FormControl>
-                      <FormMessage className="text-red-500/70 text-xs" />
-                    </FormItem>
-                  )}
+                  id="address"
                 />
-                <div className="flex justify-between">
-                  <div></div>
-                  <SubmitButton
-                    disabled={disabled}
-                    success={sucess}
-                    loading={loading}
-                    childern={'Add'}
-                    type="submit"
-                  />
-                </div>
-              </form>
-            </Form>
+              </div>
+              <div className="flex justify-end">
+                <SubmitButton
+                  childern={'Add'}
+                  type="submit"
+                />
+              </div>
+            </form>
           </div>
         </DialogContent>
       </Dialog>
@@ -179,11 +106,11 @@ function Wallets({ wallets }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2 mb-12">
       {wallets.map((wallet, index) => (
-        <Card key={index} className="p-2">
+        <Card key={index} className="p-4">
           <CardContent className="flex items-center justify-between p-0">
             <div>
               <div className="font-bold">{wallet.name}</div>
-              <div className="truncate max-w-[13rem] sm:max-w-[20rem] lg:max-w-md duration-700">
+              <div className="truncate max-w-[13rem] sm:max-w-[19rem] lg:max-w-md duration-700 text-sm font-jbmono text-neutral-400">
                 {wallet.address}
               </div>
             </div>

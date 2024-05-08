@@ -93,25 +93,7 @@
 }
 
 @layer utilities {
-  /* Act as a border */
-  .button-wrapper {
-    @apply relative p-2;
-  }
-
-  /* Gradient */
-  .button-wrapper::before {
-    background: conic-gradient(
-      rgba(244, 114, 182, 0.4) 0deg,
-      rgba(192, 132, 252, 0.4) 0deg,
-      transparent 360deg
-    );
-
-    @apply absolute h-[150%] w-[150%] animate-border-spin content-[''];
-  }
-
-  /* Body */
-  .button {
-    @apply absolute h-[calc(100%-10px)] w-[calc(100%-10px)];
+  label {
+    @apply font-jbmono font-bold text-sm;
   }
 }
-

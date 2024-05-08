@@ -18,9 +18,10 @@ const avatarSchema = z.object({
   avatar: z.string().url({ message: 'Invalid url.' }),
 });
 
-export async function updateInfo(data) {
+export async function updateInfo(prevState, formData) {
+  const name = formData.get('name')
   const validatedFields = infoSchema.safeParse({
-    name: data.name,
+    name,
   });
   if (!validatedFields.success) {
     const error = validatedFields.error.flatten().fieldErrors;
@@ -38,10 +39,7 @@ export async function updateInfo(data) {
   }
   const userId = session.user.id;
   try {
-    const info = {
-      name: data.name,
-    };
-    await update('users', '$set', info, { _id: new ObjectId(userId) });
+    await update('users', '$set', {name}, { _id: new ObjectId(userId) });
     return {
       message: 'Your name updated.',
       type: 'success',

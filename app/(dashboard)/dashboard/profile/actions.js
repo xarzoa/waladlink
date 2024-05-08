@@ -1,6 +1,6 @@
 'use server';
 import { z } from 'zod';
-import { update } from '@/lib/db';
+import { update, get } from '@/lib/db';
 import { Redis } from '@upstash/redis';
 import { ObjectId } from 'mongodb';
 import { auth } from '@/lib/auth';
@@ -42,10 +42,10 @@ const avatarSchema = z.object({
   avatar: z.string().url({ message: 'Invalid url.' }),
 });
 
-export async function updateInfo(preState,formData) {
-  const name = formData.get('name')
-  const location = formData.get('location')
-  const bio = formData.get('bio')
+export async function updateInfo(preState, formData) {
+  const name = formData.get('name');
+  const location = formData.get('location');
+  const bio = formData.get('bio');
   const validatedFields = infoSchema.safeParse({
     name,
     location: location || '',
@@ -88,10 +88,8 @@ export async function updateInfo(preState,formData) {
   }
 }
 
-export async function updateTheme(data) {
-  const validatedFields = themeSchema.safeParse({
-    theme: data.theme,
-  });
+export async function updateTheme(prevState, theme) {
+  const validatedFields = themeSchema.safeParse({ theme });
   if (!validatedFields.success) {
     const error = validatedFields.error.flatten().fieldErrors;
     return {
@@ -108,10 +106,7 @@ export async function updateTheme(data) {
   }
   const userId = session.user.id;
   try {
-    const theme = {
-      theme: data.theme,
-    };
-    await update('userData', '$set', theme, { _id: new ObjectId(userId) });
+    await update('userData', '$set', { theme }, { _id: new ObjectId(userId) });
     return {
       message: 'Theme updated.',
       type: 'success',
@@ -167,9 +162,10 @@ export async function updateAvatar(data) {
   }
 }
 
-export async function updateUsername(data, oldUsername) {
+export async function updateUsername(prevState, formData) {
+  const username = formData.get('username');
   const validatedFields = usernameSchema.safeParse({
-    username: data.username,
+    username,
   });
   if (!validatedFields.success) {
     const error = validatedFields.error.flatten().fieldErrors;
@@ -187,22 +183,31 @@ export async function updateUsername(data, oldUsername) {
   }
   const userId = session.user.id;
   try {
+    const usernameData = await get('userData', { _id: new ObjectId(userId) });
+    if(username === usernameData.username){
+      return {
+        message: 'You already changed the username.',
+        type: 'error',
+      };
+    }
     const redis = new Redis({
       url: process.env.REDIS_URL,
       token: process.env.REDIS_TOKEN,
     });
-    const username = {
-      username: data.username,
-    };
     const usernames = {
-      history: data.username,
+      history: username,
     };
-    await update('userData', '$set', username, { _id: new ObjectId(userId) });
+    await update(
+      'userData',
+      '$set',
+      { username },
+      { _id: new ObjectId(userId) }
+    );
     await update('userData', '$push', usernames, {
       _id: new ObjectId(userId),
     });
-    await redis.hdel(`user:${oldUsername}`, { exists: true, userId });
-    await redis.hset(`user:${data.username}`, { exists: true, userId });
+    await redis.hset(`user:${usernameData.username}`, { exists: false, userId: '' });
+    await redis.hset(`user:${username}`, { exists: true, userId });
     return {
       message: 'Username updated.',
       type: 'success',

@@ -9,7 +9,7 @@ export default function SubmitButton({ childern, size, className, disabled, ...p
     <Button
       size={size}
       disabled={disabled || pending}
-      className={`${className}`}
+      className={`font-jbmono ${className}`}
       {...props}
     >
       {pending ? <Dots className="animate-spin" /> : [childern]}

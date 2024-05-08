@@ -1,14 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
 import {
   Card,
   CardContent,
@@ -16,18 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import SubmitButton from '@/components/custom/submit-button';
-import {
-  updateAvatar,
-  updateInfo,
-  deleteAccount,
-} from './actions';
+import { updateAvatar, updateInfo, deleteAccount } from './actions';
 import {
   Dialog,
   DialogContent,
@@ -36,40 +20,21 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Camera } from 'lucide-react';
+import { useFormState } from 'react-dom';
 
-const FormSchema = z.object({
-  name: z.string(),
-});
+export default function SettingsComp({ info }) {
+  const [name, setName] = useState(info.name);
+  const avatarInput = useRef(null);
+  const [infoState, updateInfoAction] = useFormState(updateInfo, {});
 
-export default function SettingsComp({ data }) {
-  const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(false);
-  const [name, setName] = useState(data.name)
-
-  const form = useForm({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      name
-    },
-  });
-  async function onSubmit(data) {
-    setName(data.name)
-    setLoading(true);
-    const toastId = toast.loading('Updating your info...');
-    const res = await updateInfo(data);
-    toast[res.type](res.message, { id: toastId });
-    if (res.type === 'success') {
-      setSuccess(true);
-      form.reset();
+  useEffect(() => {
+    if (infoState.type) {
+      toast[infoState.type](infoState.message);
     }
-    setLoading(false);
-    setDisabled(true);
-    setTimeout(() => {
-      setDisabled(false);
-      setSuccess(false);
-    }, 2000);
-  }
+  }, [infoState]);
+
   async function handleAvatar(data) {
     const toastId = toast.loading('Uploading...');
     if (data.target.files.length === 1) {
@@ -107,59 +72,57 @@ export default function SettingsComp({ data }) {
           </CardHeader>
           <CardContent className="grid w-full lg:grid-cols-2 md:grid-cols-2 items-center gap-2">
             <div>
-              <Label>Picture</Label>
-              <Avatar className="h-32 w-32 mt-[8px]">
+              <label>Avatar</label>
+              <Avatar className="h-32 w-32 mt-3 relative grid place-items-center group duration-500">
                 <AvatarImage
-                  src={`${data.image}&width=128&height=128`}
-                  alt={data.name || 'Profile picture'}
+                  src={`${info.image}&width=128&height=128`}
+                  alt={info.name}
+                  className="group-hover:blur-lg duration-500"
                 />
-                <AvatarFallback>
-                  {data.name
-                    ? data.name.split('')[0].toUpperCase()
-                    : data.email.split('')[0].toUpperCase()}
+                <AvatarFallback className="group-hover:blur-lg duration-500">
+                  {info.name
+                    ? info.name.split('')[0].toUpperCase()
+                    : info.email?.split('')[0].toUpperCase()}
                 </AvatarFallback>
+                <div className="absolute">
+                  <input
+                    onProgress={console.log}
+                    placeholder="Change avatar"
+                    type="file"
+                    ref={avatarInput}
+                    className="hidden"
+                    onChange={handleAvatar}
+                    accept="image/png, image/webp, image/jpeg"
+                  />
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="h-32 w-32 group bg-transparent focus:bg-transparent hover:bg-transparent"
+                    onClick={() => avatarInput.current.click()}
+                  >
+                    <Camera className="size-10 invisible group-hover:visible duration-200" />
+                  </Button>
+                </div>
               </Avatar>
             </div>
-            <Input
-              placeholder="Avatar"
-              type="file"
-              accept="image/png, image/webp, image/jpeg"
-              onChange={handleAvatar}
-            />
           </CardContent>
           <CardContent>
-            <Form {...form}>
-              <form
-                className="space-y-4"
-                onSubmit={form.handleSubmit(onSubmit)}
-              >
-                <FormField
-                  control={form.control}
+            <form action={updateInfoAction} className="space-y-3">
+              <div className="space-y-2">
+                <label htmlFor="name" className="font-bold text-sm font-jbmono">
+                  Name
+                </label>
+                <Input
+                  placeholder="Name"
                   name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="font-bold text-neutral-300">
-                        Name
-                      </FormLabel>
-                      <FormControl>
-                        <Input placeholder="Name" {...field} />
-                      </FormControl>
-                      <FormMessage className="text-red-500/70 text-xs" />
-                    </FormItem>
-                  )}
+                  id="name"
+                  defaultValue={name}
                 />
-                <div className="flex justify-between">
-                  <div></div>
-                  <SubmitButton
-                    disabled={disabled}
-                    success={success}
-                    loading={loading}
-                    childern={'Save'}
-                    type="submit"
-                  />
-                </div>
-              </form>
-            </Form>
+              </div>
+              <div className='flex justify-end'>
+                <SubmitButton childern="Save" />
+              </div>
+            </form>
           </CardContent>
         </Card>
         <DeleteAccount />
@@ -169,10 +132,13 @@ export default function SettingsComp({ data }) {
 }
 
 function DeleteAccount() {
-  const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [deleteState, deleteAction] = useFormState(deleteAccount, {});
+  useEffect(() => {
+    if (deleteState.type) {
+      toast[deleteState.type](deleteState.message);
+    }
+  }, [deleteState]);
   const doOpen = () => {
     if (open) {
       setOpen(false);
@@ -180,22 +146,6 @@ function DeleteAccount() {
       setOpen(true);
     }
   };
-
-  async function deleteMe() {
-    setLoading(true);
-    const toastId = toast.loading('Deleting your account...');
-    const res = await deleteAccount();
-    toast[res.type](res.message, { id: toastId });
-    if (res.type === 'success') {
-      setSuccess(true);
-    }
-    setLoading(false);
-    setDisabled(true);
-    setTimeout(() => {
-      setDisabled(false);
-      setSuccess(false);
-    }, 2000);
-  }
 
   return (
     <div>
@@ -230,10 +180,7 @@ function DeleteAccount() {
                     />
                     <SubmitButton
                       childern={'Continue'}
-                      disabled={disabled}
-                      success={success}
-                      loading={loading}
-                      onClick={deleteMe}
+                      onClick={deleteAction}
                     />
                   </div>
                 </DialogFooter>

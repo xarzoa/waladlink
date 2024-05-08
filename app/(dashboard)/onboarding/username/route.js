@@ -50,8 +50,7 @@ export async function GET(request, context) {
   }
   const session = await auth();
   const identifier = session.user.id;
-  const { success, remaining } = await ratelimit.limit(identifier);
-  console.log(remaining);
+  const { success } = await ratelimit.limit(identifier);
   if (!success) {
     return NextResponse.json(
       { availability: false, message: 'Ratelimit reached.' },
