@@ -95,7 +95,7 @@ export async function updateAvatar(data) {
   }
 }
 
-export async function deleteAccount() {
+export async function deleteAccount(data) {
   const session = await auth();
   if (!session) {
     return {

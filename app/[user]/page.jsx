@@ -21,6 +21,7 @@ export async function generateMetadata({ params }) {
   }
   return {
     title: `${user.name}'s wal-adds.`,
+    description: user.bio,
     icons: {
       icon: {
         url:
