@@ -84,7 +84,7 @@ export default async function HomePage() {
           <div className="grid px-6 md:m-0 py-16 md:border-b">
             <div className="grid place-items-center relative grid-bg">
               <div className="animate-preview delay-700">
-                <div className="blur-sm hover:blur-none hover:scale-105 duration-500">
+                <div className="blur-lg hover:scale-105 duration-500">
                   <WhiteTheme user={user} />
                 </div>
               </div>

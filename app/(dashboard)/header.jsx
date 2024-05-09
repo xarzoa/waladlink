@@ -6,6 +6,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { usePathname } from 'next/navigation';
 import { Menu, Settings, Home, WalletMinimal, User } from 'lucide-react';
 import Link from 'next/link';
@@ -80,37 +88,34 @@ export default function Header({ session }) {
               ))}
             </div>
             <div className="md:hidden">
-              <Popover>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-none focus:bg-neutral-700/30 backdrop-blur-2xl hover:bg-neutral-700/30"
-                  asChild
-                >
-                  <PopoverTrigger>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    size="icon"
+                    className="bg-transparent hover:bg-neutral-800 text-neutral-200 rounded-none"
+                  >
                     <Menu />
-                  </PopoverTrigger>
-                </Button>
-                <PopoverContent className="grid grid-cols-1 space-y-2 w-screen h-screen bg-transparent backdrop-blur-2xl lg:hidden mt-1">
-                  <div className="flex flex-col space-y-2">
-                    {menuButtons.map((button, key) => (
-                      <Button
-                        key={key}
-                        className={`font-bold backdrop-blur-2xl rounded-none focus:bg-neutral-700/30 ${
-                          button.path === path ? 'bg-neutral-700/30' : ''
-                        }`}
-                        variant="ghost"
-                        asChild
-                      >
-                        <Link href={button.path}>
-                          {button.icon}
-                          {button.name}
-                        </Link>
-                      </Button>
-                    ))}
-                  </div>
-                </PopoverContent>
-              </Popover>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="ml-2 mt-1 lg:ml-4 space-y-1">
+                  {menuButtons.map((button, key) => (
+                    <DropdownMenuItem
+                      key={key}
+                      className={`font-bold backdrop-blur-2xl rounded-none focus:bg-neutral-700/30 ${
+                        button.path === path ? 'bg-neutral-700/30' : ''
+                      }`}
+                      variant="ghost"
+                      asChild
+                    >
+                      <Link href={button.path} className="flex items-center">
+                        {button.icon}
+                        {button.name}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+              
             </div>
             <div className="absolute right-2 grid place-items-baseline">
               <Profile session={session} path={path} />

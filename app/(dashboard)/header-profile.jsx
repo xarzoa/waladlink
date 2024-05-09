@@ -62,17 +62,6 @@ export default function Profile({ path, session }) {
           <DropdownMenuLabel>Account</DropdownMenuLabel>
           <SmallProfile email={email} image={image} name={name} />
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            asChild
-            className={
-              path === '/dashboard/settings' ? 'bg-neutral-600/40' : ''
-            }
-          >
-            <Link href="/dashboard/settings" className="flex items-center">
-              <Settings className="mr-2 h-4 w-4" />
-              Settings
-            </Link>
-          </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <a
               href="https://discord.gg/zeg6yERdaS"

@@ -3,20 +3,7 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: #000;
-}
-::-webkit-scrollbar-thumb {
-  background: #2f2f2f;
-  border-radius: 2.5px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #343434;
-}
-::-webkit-scrollbar-button {
-  display: none;
+  width: 0;
 }
 
 .hide-scroll::-webkit-scrollbar {
