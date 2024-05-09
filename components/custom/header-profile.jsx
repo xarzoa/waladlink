@@ -1,6 +1,6 @@
 'use client';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { LogOut, Settings, MessagesSquare } from 'lucide-react';
+import { LogOut, MessagesSquare } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,9 +11,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { useState } from 'react';
-import { signOutAction } from './dashboard/actions';
+import { signOutAction } from '../../app/(dashboard)/dashboard/actions';
 
 function ReuseAvatar({ email, image, name }) {
   return (

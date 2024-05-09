@@ -2,22 +2,15 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { usePathname } from 'next/navigation';
 import { Menu, Settings, Home, WalletMinimal, User } from 'lucide-react';
 import Link from 'next/link';
-import Profile from './header-profile';
+import Profile from '@/components/custom/header-profile';
 
 export default function Header({ session }) {
   const [offset, setOffset] = useState(0);
@@ -115,7 +108,6 @@ export default function Header({ session }) {
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
-              
             </div>
             <div className="absolute right-2 grid place-items-baseline">
               <Profile session={session} path={path} />
