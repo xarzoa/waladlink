@@ -6,6 +6,7 @@ import { ObjectId } from 'mongodb';
 import { auth, signOut } from '@/lib/auth';
 import { Redis } from '@upstash/redis';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 const infoSchema = z.object({
   name: z
@@ -95,7 +96,7 @@ export async function updateAvatar(data) {
   }
 }
 
-export async function deleteAccount(data) {
+export async function deleteAccount() {
   const session = await auth();
   if (!session) {
     return {
@@ -125,6 +126,6 @@ export async function deleteAccount(data) {
       type: 'success',
     };
   } finally {
-    revalidatePath('/dashboard/settings');
+    redirect('/');
   }
 }

@@ -32,7 +32,7 @@ export default function Authentication() {
 
   return (
     <div>
-      <div className="relative font-jbmono">
+      <div className="relative">
         <div className="absolute left-5 h-14 w-14 bg-white blur-3xl -z-20 animate-preview delay-700"></div>
         <Card>
           <CardHeader>
@@ -43,8 +43,8 @@ export default function Authentication() {
           </CardHeader>
           <CardContent>
             <form action={signIn} className="space-y-2">
-              <label htmlFor="email" className='text-sm font-bold'>Email</label>
-              <Input placeholder="Email" name="email" id="email"/>
+              <label htmlFor="email" className='text-sm font-bold font-jbmono'>Email</label>
+              <Input placeholder="Email" name="email" id="email" className="font-jbmono"/>
               <div className="text-xs text-red-500">
                 {error}
               </div>

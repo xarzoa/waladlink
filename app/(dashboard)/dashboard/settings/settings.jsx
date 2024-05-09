@@ -119,7 +119,7 @@ export default function SettingsComp({ info }) {
                   defaultValue={name}
                 />
               </div>
-              <div className='flex justify-end'>
+              <div className="flex justify-end">
                 <SubmitButton childern="Save" />
               </div>
             </form>
@@ -178,10 +178,9 @@ function DeleteAccount() {
                       onClick={doOpen}
                       className="font-bold"
                     />
-                    <SubmitButton
-                      childern={'Continue'}
-                      onClick={deleteAction}
-                    />
+                    <form action={deleteAction}>
+                      <SubmitButton childern={'Continue'} />
+                    </form>
                   </div>
                 </DialogFooter>
               </DialogContent>

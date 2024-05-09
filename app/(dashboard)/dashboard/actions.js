@@ -1,8 +1,7 @@
 'use server';
 import { auth, signOut } from '@/lib/auth';
-import { revalidatePath } from 'next/cache';
 
-export async function signOutAction(data) {
+export async function signOutAction() {
   const session = await auth();
   if (!session) {
     return {
@@ -11,5 +10,4 @@ export async function signOutAction(data) {
     };
   }
   await signOut();
-  revalidatePath('/dashboard')
 }

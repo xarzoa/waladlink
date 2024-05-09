@@ -20,10 +20,11 @@ import { toast } from 'sonner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Loader, CircleCheck, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import { useDebounce } from '@uidotdev/usehooks';
 import { createUser } from './actions';
 import { useRouter } from 'next/navigation';
+import Dots from '@/components/custom/loader/dots'
 
 const usernameSearchSchema = z.object({
   username: z
@@ -169,9 +170,9 @@ function SubmitButton({ disabled, loading, success }) {
       }`}
     >
       {loading ? (
-        <Loader className="h-6 w-6 animate-spin" />
+        <Dots />
       ) : success ? (
-        <CircleCheck className="h-6 w-6" />
+        <Check className="h-6 w-6" />
       ) : (
         <ArrowRight className="h-6 w-6" />
       )}
