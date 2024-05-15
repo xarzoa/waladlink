@@ -21,12 +21,12 @@ export default function GlassTheme({ user }) {
           <Image
             alt={user.name + "'s background."}
             src={
-              user.avatar ||
-              'https://images.ducklabs.xyz/optimize/waladlinkweb/assets/b8fe5f87-1aed-4db3-ac0a-8d8389bc4062.jpg?bucket=ducklabs&width=1080&height=1080'
+              `${process.env.NEXT_PUBLIC_IMAGE_SERVER}/optimize/duckpass/avatars/${user.avatar}?bucket=walad&width=128&height=128` ||
+              '/blobs.png'
             }
             blurDataURL={
-              user.avatar ||
-              'https://images.ducklabs.xyz/optimize/waladlinkweb/assets/b8fe5f87-1aed-4db3-ac0a-8d8389bc4062.jpg?bucket=ducklabs&width=100&height=100'
+              `${process.env.NEXT_PUBLIC_IMAGE_SERVER}/optimize/duckpass/avatars/${user.avatar}?bucket=walad&width=128&height=128` ||
+              '/blobs.png'
             }
             placeholder="blur"
             quality={100}
@@ -71,7 +71,7 @@ function Info({ user }) {
       <div className="grid grid-cols-1 place-items-center">
         <Avatar className="h-32 w-32 rounded-3xl">
           <AvatarImage
-            src={user.avatar ? `${user.avatar}&width=128&height=128` : ''}
+            src={user.avatar ? `${process.env.NEXT_PUBLIC_IMAGE_SERVER}/optimize/web/avatars/${user.avatar}?bucket=walad&width=128&height=128` : ''}
             alt={`${user.name}'s profile picture.`}
           />
           <AvatarFallback className="text-5xl bg-black/10">

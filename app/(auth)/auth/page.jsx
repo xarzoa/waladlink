@@ -11,14 +11,6 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function Auth() {
-  try {
-    const session = await auth();
-    if (session) {
-      redirect('/dashboard');
-    }
-  } catch (e) {
-    console.log(e);
-  }
   return (
     <main className="min-h-screen w-screen grid place-items-center">
       <Authentication />

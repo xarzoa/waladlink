@@ -53,7 +53,8 @@ function BasicInfo({ info }) {
         const file = new FormData();
         file.append('file', data.target.files[0]);
         let response = await fetch(
-          'https://images.ducklabs.xyz/upload?id=waladlinkweb&path=avatars&bucket=ducklabs',
+          process.env.NEXT_PUBLIC_IMAGE_SERVER +
+            '/upload?id=web&path=avatars&bucket=walad',
           {
             method: 'POST',
             body: file,
@@ -83,7 +84,8 @@ function BasicInfo({ info }) {
               <label>Avatar</label>
               <Avatar className="h-32 w-32 mt-3 relative grid place-items-center group duration-500">
                 <AvatarImage
-                  src={`${info.avatar}&width=128&height=128`}
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_SERVER}/optimize/web/avatars/${info.avatar
+                  }?bucket=walad&width=128&height=128`}
                   alt={info.username}
                   className="group-hover:blur-lg duration-500"
                 />
@@ -100,7 +102,7 @@ function BasicInfo({ info }) {
                     ref={avatarInput}
                     className="hidden"
                     onChange={handleAvater}
-                    accept="image/png, image/webp, image/jpeg"
+                    accept="image/png, image/webp, image/jpeg, image/gif"
                   />
                   <Button
                     size="icon"
@@ -151,7 +153,7 @@ function BasicInfo({ info }) {
                   defaultValue={bio}
                 />
               </div>
-              <div className='flex justify-end'>
+              <div className="flex justify-end">
                 <SubmitButton childern="Save" />
               </div>
             </form>
@@ -254,7 +256,7 @@ function ChangeUsername({ username }) {
     setTimeout(() => {
       setChanged(false);
     }, 2000);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedTerm]);
   function inputChange(e) {
     const value = e.target.value;
@@ -286,11 +288,11 @@ function ChangeUsername({ username }) {
               className="font-jbmono"
             />
             <div>
-            <SubmitButton
-              disabled={disabled && !available}
-              childern={'Change'}
-              type="submit"
-            />
+              <SubmitButton
+                disabled={disabled && !available}
+                childern={'Change'}
+                type="submit"
+              />
             </div>
           </form>
         </CardContent>

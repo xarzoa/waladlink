@@ -16,7 +16,7 @@ const infoSchema = z.object({
 });
 
 const avatarSchema = z.object({
-  avatar: z.string().url({ message: 'Invalid url.' }),
+  avatar: z.string().min(27, { message: "Invalid Avatar Id."}).max(28, { message: "Invalid Avatar Id."})
 });
 
 export async function updateInfo(prevState, formData) {
@@ -57,9 +57,10 @@ export async function updateInfo(prevState, formData) {
 }
 
 export async function updateAvatar(data) {
-  const avatarURL = `https://images.ducklabs.xyz/optimize/${data.key}?bucket=ducklabs`;
+  const key = data.key.split('/');
+  const avatarId = key[key.length-1]
   const validatedFields = avatarSchema.safeParse({
-    avatar: avatarURL,
+    avatar: avatarId,
   });
   if (!validatedFields.success) {
     const error = validatedFields.error.flatten().fieldErrors;
@@ -77,10 +78,7 @@ export async function updateAvatar(data) {
   }
   const userId = session.user.id;
   try {
-    const image = {
-      image: avatarURL,
-    };
-    await update('users', '$set', image, { _id: new ObjectId(userId) });
+    await update('users', '$set', { image: avatarId }, { _id: new ObjectId(userId) });
     return {
       message: 'Avatar updated.',
       type: 'success',

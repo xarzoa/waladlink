@@ -50,7 +50,7 @@ function Info({ user }) {
       <div className="grid grid-cols-1 place-items-center">
         <Avatar className="h-32 w-32 rounded-3xl">
           <AvatarImage
-            src={user.avatar ? `${user.avatar}&width=128&height=128` : ''}
+            src={user.avatar ? `${process.env.NEXT_PUBLIC_IMAGE_SERVER}/optimize/web/avatars/${user.avatar}?bucket=walad&width=128&height=128` : ''}
             alt={`${user.name}'s profile picture.`}
           />
           <AvatarFallback className="text-5xl bg-neutral-900">

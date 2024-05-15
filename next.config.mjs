@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.ducklabs.xyz',
+        hostname: 'assets.walad.link',
         port: '',
         pathname: '/**',
       },

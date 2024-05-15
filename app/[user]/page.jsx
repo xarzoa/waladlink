@@ -24,9 +24,7 @@ export async function generateMetadata({ params }) {
     description: user.bio,
     icons: {
       icon: {
-        url:
-          user.avatar ||
-          'https://images.ducklabs.xyz/optimize/waladlinkweb/assets/aa48804b-78f9-47e6-9768-a1a9a26dbed0.png?bucket=ducklabs&width=100&height=100',
+        url: `${process.env.NEXT_PUBLIC_IMAGE_SERVER}/optimize/web/avatars/${user.avatar || 'OWI3QuJB2pqaeYcF5VSczkB6.png' }?bucket=walad&width=128&height=128`
       },
     },
   };

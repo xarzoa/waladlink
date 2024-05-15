@@ -17,7 +17,8 @@ import { signOutAction } from '../../app/(dashboard)/dashboard/actions';
 function ReuseAvatar({ email, image, name }) {
   return (
     <Avatar className="rounded-none">
-      {image ? <AvatarImage src={`${image}&width=128&height=128`} /> : ''}
+      {image ? <AvatarImage src={`${process.env.NEXT_PUBLIC_IMAGE_SERVER}/optimize/duckpass/avatars/${image
+                  }?bucket=ducklabs&width=128&height=128`} /> : ''}
       <AvatarFallback className="rounded-none">
         {name
           ? name.split('')[0].toUpperCase()

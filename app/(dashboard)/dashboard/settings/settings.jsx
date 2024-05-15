@@ -42,7 +42,8 @@ export default function SettingsComp({ info }) {
         const file = new FormData();
         file.append('file', data.target.files[0]);
         let responce = await fetch(
-          'https://images.ducklabs.xyz/upload?id=duckpass&path=avatars&bucket=ducklabs',
+          process.env.NEXT_PUBLIC_IMAGE_SERVER +
+            '/upload?id=duckpass&path=avatars&bucket=ducklabs',
           {
             method: 'POST',
             body: file,
@@ -75,7 +76,8 @@ export default function SettingsComp({ info }) {
               <label>Avatar</label>
               <Avatar className="h-32 w-32 mt-3 relative grid place-items-center group duration-500">
                 <AvatarImage
-                  src={`${info.image}&width=128&height=128`}
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_SERVER}/optimize/duckpass/avatars/${info.image
+                  }?bucket=ducklabs&width=128&height=128`}
                   alt={info.name}
                   className="group-hover:blur-lg duration-500"
                 />
