@@ -287,7 +287,7 @@ function ChangeUsername({ username }) {
               name="username"
               className="font-jbmono"
             />
-            <div>
+            <div className='flex w-full justify-end'>
               <SubmitButton
                 disabled={disabled && !available}
                 childern={'Change'}

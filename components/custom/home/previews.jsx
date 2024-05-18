@@ -32,10 +32,10 @@ export default function Previews() {
           </div>
         </div>
         <div className="p-4 place-self-center lg:place-self-start space-y-4 m-4 lg:m-12 max-w-lg">
-          <h1 className="text-3xl md:text-4xl font-bold font-gabarito text-neutral-200">
+          <h1 className="text-xl md:text-4xl font-bold font-gabarito text-neutral-200">
             What and how?
           </h1>
-          <div className="font-semibold text-neutral-400 space-y-4">
+          <div className="font-semibold text-neutral-400 space-y-4 text-sm md:text-base">
             <p>
               <span className="underline">WalAd</span> simplifies things! Create
               a single, secure link that holds all your crypto wallet addresses.

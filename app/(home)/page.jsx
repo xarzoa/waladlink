@@ -73,7 +73,7 @@ export default async function HomePage() {
             <Previews />
           </div>
           <div className="grid place-items-center md:m-0 p-6 md:border-y">
-            <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 font-semibold font-dmsans divide-solid md:divide-none divide-y list-disc md:text-lg text-neutral-300 md:text-neutral-400">
+            <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 font-semibold font-dmsans divide-solid md:divide-none divide-y list-disc md:text-lg text-neutral-300 md:text-neutral-400 text-sm">
               {bragging.map((brag, index) => (
                 <li key={index} className="pt-3 max-w-lg m-4">
                   {brag}
